@@ -85,7 +85,7 @@ Caddy forwards the headers and WebSocket upgrades automatically. Ports `80` and 
 
 Never send TAK ports through an HTTP reverse proxy. Each device proves who it is with its own client certificate, and only Core may check it. A proxy that terminates TLS would hide that certificate.
 
-If two TLS services must share one public port, use layer-4 SNI passthrough as described in [TAK ports](/installation/tak-ports#_4-share-8443-with-sni-passthrough). The router may read the host name but must forward the original TLS connection unchanged.
+If two TLS services must share one public port, use layer-4 SNI passthrough as described in [TAK ports](/installation/tak-ports#sni-passthrough). The router may read the host name but must forward the original TLS connection unchanged.
 
 ## Certificates
 

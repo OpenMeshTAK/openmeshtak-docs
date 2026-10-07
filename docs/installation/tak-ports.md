@@ -12,7 +12,7 @@ The built-in TAK server needs three public TCP ports. This page explains which p
 
 **Quick Connect** is the ATAK setup where a participant enters only the server name, username and password. It only works without extra input when enrollment is on `8446` and CoT is on `8089`, because ATAK asks for those ports before it has learned anything from the server. Keep these two ports free wherever possible.
 
-`8443` is more flexible. ATAK can learn a different Data Package port during enrollment, so you can move it when nothing else helps. iTAK cannot; see [Use a different Data Package port](#use-a-different-data-package-port).
+`8443` is more flexible. ATAK can learn a different Data Package port during enrollment, so you can move it when nothing else helps. iTAK cannot; see [Use a different Data Package port](#different-data-package-port).
 
 ## Public ports and container ports
 
@@ -52,7 +52,7 @@ If Core still cannot bind one of its ports, it does not start at all. A TAK serv
 
 Work through these options in order and stop at the first one that fits.
 
-### 1. Publish the standard ports directly
+### 1. Publish the standard ports directly {#standard-ports-direct}
 
 If all three ports are free, keep the shipped mapping:
 
@@ -63,7 +63,7 @@ ports:
   - "8089:8089"
 ```
 
-### 2. Give the TAK host its own address
+### 2. Give the TAK host its own address {#dedicated-address}
 
 If the server has a second public IPv4 or IPv6 address, point the DNS name of the TAK host at it and publish Core's ports only on that address. The other program keeps its port on the first address.
 
@@ -76,7 +76,7 @@ ports:
 
 This is the recommended fix for every port, and the only clean fix when `8446` or `8089` is taken. Do not rely on IPv6 alone unless every participant network supports it.
 
-### 3. Move the other program to a private address
+### 3. Move the other program to a private address {#move-other-program}
 
 Some programs only need to be reachable through another route, for example a hosting panel that you already open through a normal web address on `443`. If that program can listen on `127.0.0.1` instead of all addresses, the public port becomes free for Core.
 
@@ -93,7 +93,7 @@ A plain `"8443:8443"` also binds `127.0.0.1` and collides with the program there
 
 Check with `sudo ss -tlnp | grep 8443` that the other program listens only on `127.0.0.1` or `[::1]`. Repeat the check after updating that program: an update may restore its public listener, and Core then no longer starts.
 
-### 4. Share 8443 with SNI passthrough
+### 4. Share 8443 with SNI passthrough {#sni-passthrough}
 
 On a single public address, a layer-4 router such as HAProxy (TCP mode) or nginx `stream` with `ssl_preread` can own public `8443`. It reads only the host name from the start of each TLS connection and forwards the connection unchanged: `tak.example.org` goes to Core, the other name goes to the other program.
 
@@ -105,7 +105,7 @@ This works only when:
 
 Test enrollment, Data Package download and CoT with your participants' app versions before you rely on this setup.
 
-### 5. Use a different Data Package port
+### 5. Use a different Data Package port {#different-data-package-port}
 
 When nothing else works and **all participants use ATAK**, publish Marti on another port, for example `8484`:
 

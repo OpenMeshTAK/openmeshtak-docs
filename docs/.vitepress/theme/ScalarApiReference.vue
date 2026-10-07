@@ -40,6 +40,10 @@ async function mount(): Promise<void> {
   }
 
   const { createApiReference } = await import("@scalar/api-reference");
+  // The page may have been left while the module was loading.
+  if (!container.value) {
+    return;
+  }
   unmount();
   reference = createApiReference(container.value, configuration());
 }
@@ -56,5 +60,6 @@ onUnmounted(unmount);
 </script>
 
 <template>
-  <div ref="container" class="scalar-reference" />
+  <!-- vp-raw keeps the VitePress router away from Scalar's own hash links. -->
+  <div ref="container" class="scalar-reference vp-raw" />
 </template>
