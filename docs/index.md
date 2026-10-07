@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: OpenMeshTak
-  text: One event setup for ATAK, iTAK and Meshtastic
-  tagline: Define the event once. Every participant gets their own callsign, TAK connection, radio profile and map data, ready to import.
+  text: Events for TAK and Meshtastic
+  tagline: Set up an event once. Every participant gets their own TAK connection, radio profile and maps.
   image:
     src: /logo.svg
     alt: OpenMeshTak
