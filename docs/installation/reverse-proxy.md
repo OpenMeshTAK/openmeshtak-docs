@@ -27,14 +27,16 @@ Point your reverse proxy for `PUBLIC_HOST` at `http://127.0.0.1:8080`. The proxy
 
 ### Let Core see real client addresses
 
-Behind a proxy, every request reaches Core from the proxy's address. Set `TRUST_PROXY` so that Core uses the `X-Forwarded-For` header instead, for example for rate limits on sign-in and claim links. Add it to the `environment` section of `docker-compose.yml`:
+Behind a proxy, every request reaches Core from the proxy's address, so all visitors would share one rate limit, for example for claim links, setup links and API keys. The shipped `docker-compose.yml` therefore sets `TRUST_PROXY`:
 
 ```yaml
 environment:
-  TRUST_PROXY: "true"
+  TRUST_PROXY: ${TRUST_PROXY:-true}
 ```
 
-Only do this while port `8080` is published on `127.0.0.1`. Then nothing but your proxy can reach it, and nobody can fake the header.
+Core then takes the client address from the last `X-Forwarded-For` entry, the one your proxy adds. Earlier entries come from the visitor and are ignored, so nobody can fake their address by sending the header themselves.
+
+This is only safe while port `8080` is published on `127.0.0.1` and one proxy sits in front of Core. If anything other than your proxy can reach port `8080`, set `TRUST_PROXY=false` in `.env`.
 
 ### nginx
 
