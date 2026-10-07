@@ -1,6 +1,6 @@
 # Backup and upgrade
 
-All data of an installation lives in two places: the `core-data` Docker volume (database, uploads, certificates) and the `root_encryption_key` file. A backup needs both.
+All data of an installation lives in two places: the `core-data` Docker volume (database, uploads, certificates) and the root key in `.env` (or the `root_encryption_key` file, if you keep it there). A backup needs both.
 
 ## Back up
 
@@ -15,7 +15,7 @@ docker run --rm \
 docker compose start core
 ```
 
-This creates `openmeshtak-<date>.tar.gz` next to the Compose file. Copy it, together with `root_encryption_key`, to another machine. Store the key apart from the archive: anyone with both can read every stored secret.
+This creates `openmeshtak-<date>.tar.gz` next to the Compose file. Copy it, together with `.env` or the key file, to another machine. Store the key apart from the archive: anyone with both can read every stored secret.
 
 ## Restore
 
@@ -32,7 +32,7 @@ docker run --rm \
 docker compose up -d
 ```
 
-Put the matching `root_encryption_key` next to `docker-compose.yml` before starting. Test a restore on a spare machine once, before you need it.
+Put the matching `.env` or key file next to `docker-compose.yml` before starting. Test a restore on a spare machine once, before you need it.
 
 ## Upgrade
 

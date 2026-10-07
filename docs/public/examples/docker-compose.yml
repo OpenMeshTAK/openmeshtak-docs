@@ -1,5 +1,26 @@
-# OpenMeshTak Core sample deployment.
-# Keep this file, .env and root_encryption_key in the same directory.
+# OpenMeshTak sample deployment: one container runs Core with the Web app, the API and the
+# built-in TAK server. Put these values into a .env file next to this file:
+#
+#   OPENMESHTAK_VERSION=0.1.0            # optional, default latest; pin it to upgrade deliberately
+#   PUBLIC_HOST=openmeshtak.example.org  # public HTTPS host name of the Web app
+#   ROOT_ENCRYPTION_KEY=...              # once: openssl rand -base64 32
+#
+# The root key is the installation's only secret. Back it up separately and never change it:
+# without it, stored secrets such as channel keys and the TAK CA key cannot be decrypted. To keep it
+# out of .env, put it in a file instead and use the commented secret lines below.
+#
+# Your reverse proxy (CloudPanel, nginx, ...) terminates HTTPS for PUBLIC_HOST and forwards to
+# http://127.0.0.1:8080. The bootstrap token for the first administrator is in `docker compose
+# logs core`. TRUST_PROXY makes Core take the client address from the last X-Forwarded-For entry,
+# which your proxy adds, so rate limits apply per client. Without it every request seems to come
+# from the Docker gateway and all clients share one limit. This is only safe while 8080 is
+# published on 127.0.0.1: if anything else can reach it, set TRUST_PROXY=false in .env.
+#
+# The TAK ports go straight to Core, which terminates mutual TLS itself. The left side of each
+# mapping is the public port and must match the TAK server page in the Web app, the only source
+# for QR codes and profiles. If 8443 is taken (CloudPanel's own administration uses it), publish
+# Data Packages on e.g. "8484:8443" and enter 8484 on the TAK server page. Keep 8446 and 8089:
+# ATAK Quick Connect expects them.
 
 name: openmeshtak
 
@@ -9,23 +30,28 @@ services:
     restart: unless-stopped
     environment:
       PUBLIC_ORIGIN: https://${PUBLIC_HOST:?Set PUBLIC_HOST in .env}
+      # Or keep the key in a file: remove this line and uncomment both secret blocks.
+      ROOT_ENCRYPTION_KEY: ${ROOT_ENCRYPTION_KEY:?Set ROOT_ENCRYPTION_KEY in .env}
       LOG_LEVEL: ${LOG_LEVEL:-info}
       # Only the reverse proxy reaches port 8080 below, so its X-Forwarded-For entry is trusted.
       TRUST_PROXY: ${TRUST_PROXY:-true}
+      # Swagger UI at https://<PUBLIC_HOST>/api/docs
       SWAGGER_ENABLED: ${SWAGGER_ENABLED:-false}
-    secrets:
-      - root_encryption_key
+    # secrets:
+    #   - root_encryption_key
     volumes:
       - core-data:/server/data
     ports:
+      # Web app and API, for the reverse proxy only.
       - "127.0.0.1:8080:3000"
+      # TAK enrollment, Data Packages (Marti) and CoT streaming.
       - "8446:8446"
       - "8443:8443"
       - "8089:8089"
 
-secrets:
-  root_encryption_key:
-    file: ./root_encryption_key
+# secrets:
+#   root_encryption_key:
+#     file: ./root_encryption_key
 
 volumes:
   core-data:

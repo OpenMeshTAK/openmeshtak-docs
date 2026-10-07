@@ -23,25 +23,29 @@ Next to it, save the [.env example](/examples/openmeshtak.env.example.txt) as `.
 | --- | --- |
 | `OPENMESHTAK_VERSION` | Optional. Without it, the newest release (`latest`) runs. Set an exact release such as {{ $coreVersion }} to upgrade only when you choose. |
 | `PUBLIC_HOST` | The public DNS name without `https://`, for example `tak.example.org`. |
-
-Keep `.env` private and out of version control.
+| `ROOT_ENCRYPTION_KEY` | The root key, see below. |
 
 ::: tip latest or a fixed version?
 With `latest`, every `docker compose pull` can bring a new version, and OpenMeshTak updates its database on the next start. That is convenient, but make a [backup](/installation/backup-upgrade) before pulling. A fixed version only changes when you edit `.env`, so nothing updates by surprise, for example shortly before an event.
 :::
 
-## 3. Create the root key
+### The root key
 
-The root key is the installation's only secret. It encrypts stored secrets such as channel keys and the TAK certificate authority, and signs sign-in sessions:
+The root key is the installation's only secret. It encrypts stored secrets such as channel keys and the TAK certificate authority, and signs sign-in sessions. Create it once and paste the output as `ROOT_ENCRYPTION_KEY`:
 
 ```sh
-openssl rand -base64 32 > root_encryption_key
-chmod 600 root_encryption_key
+openssl rand -base64 32
 ```
 
-Copy this file to a safe place now. Without it, a backup cannot be restored. See [Backup and upgrade](/installation/backup-upgrade).
+Copy it to a safe place right away and never change it. Without it, stored secrets cannot be read and a backup cannot be restored.
 
-## 4. Start
+Keep `.env` private and out of version control.
+
+::: details Keep the key in a separate file instead
+Save the key with `openssl rand -base64 32 > root_encryption_key` and `chmod 600 root_encryption_key`. In `docker-compose.yml`, remove the `ROOT_ENCRYPTION_KEY` line and uncomment both `secrets` blocks. Then `.env` contains no secret. Setting the key in both places stops OpenMeshTak from starting.
+:::
+
+## 3. Start
 
 ```sh
 docker compose up -d
@@ -55,7 +59,7 @@ Check that Core is running:
 curl --fail https://tak.example.org/api/v1/health
 ```
 
-## 5. Create the first administrator
+## 4. Create the first administrator
 
 1. Read the one-time setup token: `docker compose logs core`.
 2. Open `https://tak.example.org` and enter the token.

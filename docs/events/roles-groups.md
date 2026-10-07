@@ -6,7 +6,7 @@ Roles and groups turn a member list into callsigns, TAK teams and radio names. W
 
 A group usually is a team, for example `Bravo`. It defines:
 
-- the **callsign format**, built from `{username}` and optionally `{group}`, for example `{username} [Bravo]`;
+- the **callsign format**, built from `{username}` and optionally `{group}`, for example `{username} [{group}]`;
 - the **TAK team color** and the default TAK role;
 - optional **TAK group names** used on the TAK server; and
 - the **Meshtastic short-name prefix**, for example `B`, so the radios become `B1`, `B2` and so on.
