@@ -18,3 +18,9 @@
   --scalar-custom-header-height: var(--vp-nav-height);
   min-height: calc(100vh - var(--vp-nav-height));
 }
+
+/* VitePress fades the bottom of the outline column; on a full-width layout it only looks like a
+   stray shadow. */
+.VPDoc .aside-curtain {
+  display: none;
+}
