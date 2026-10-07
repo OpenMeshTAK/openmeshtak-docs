@@ -1,4 +1,4 @@
-# Generate provisioning artifacts
+# Download participant files
 
 Requires `member-artifacts.download` for on-behalf access. Every on-behalf view and download is audited.
 

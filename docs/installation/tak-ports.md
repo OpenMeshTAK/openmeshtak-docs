@@ -179,6 +179,6 @@ To roll back, restore the previous `docker-compose.yml` mapping and **TAK server
 
 The ATAK behavior above follows the official ATAK source: [`SslNetCotPort`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/comms/SslNetCotPort.java) (default ports), [`CertificateEnrollmentClient`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/net/CertificateEnrollmentClient.java) and [`DeviceProfileOperation`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/net/DeviceProfileOperation.java) (enrollment and profile download), and [`CotMapComponent`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/android/cot/CotMapComponent.java) (`apiSecureServerPort`). SNI passthrough is described in the [NGINX `ssl_preread`](https://nginx.org/en/docs/stream/ngx_stream_ssl_preread_module.html) and [HAProxy SNI](https://www.haproxy.com/blog/enhanced-ssl-load-balancing-with-server-name-indication-sni-tls-extension/) documentation.
 
-Source code alone is not a compatibility result. The versions on this page are the ones tested; see [Compatibility](/compatibility/).
+Source code alone is not a compatibility result. All tested app versions are listed in [TAK apps](/participants/tak-apps#tested-versions).
 
 Written for OpenMeshTak `0.1.9`.

@@ -1,4 +1,4 @@
-# Get a one-time claim link
+# Create an access link
 
 Requires `member-claims.create` for an active event.
 
@@ -32,4 +32,4 @@ Example response:
 
 Send `claimUrl` privately to the participant. It expires after 24 hours and works once. Creating another link revokes any earlier unused link for that member.
 
-The token and URL are returned only in this response. Do not log them or send them to a public channel. The participant receives their own session, not the API client's permissions.
+The link is returned only in this response. The participant signs in as themselves; they do not get the API client's permissions.

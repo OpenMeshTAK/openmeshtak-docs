@@ -19,6 +19,6 @@ curl --fail-with-body --silent --show-error \
 
 This request is safe to repeat. It creates or updates the same external identity and event membership.
 
-The result contains either the resolved membership or a sync issue. A missing role or group records an issue and leaves the membership unchanged.
+The response has `outcome: "member"` with the membership, or `outcome: "sync-issue"` when an organizer has to step in, for example because the group does not exist or the callsign is taken. A sync issue leaves the membership unchanged.
 
-Synchronization does not create a password, login provider, browser session, or “Sign in with Discord” account.
+The member gets no password or login. To give them Web access, [create an access link](/api/examples/participant-claims).

@@ -1,41 +1,63 @@
-# Build a Discord bot integration
+# Use the API from Discord
 
-The minimal integration uses one slash command such as `/join`.
+Many groups organize their events on Discord. This example shows how a Discord command could use the OpenMeshTak API, so that people join an event themselves instead of an organizer adding each one by hand. It is about the API calls, not about building a Discord bot; any bot framework works.
 
-## API client permissions
+## The idea
 
-Give the bot an API client limited to one event with:
+A participant types `/join` in your Discord server. Your bot then:
 
-- `members.sync`
+1. reads the person's Discord user ID and Discord roles;
+2. picks the matching OpenMeshTak role and group;
+3. adds the person to the event with one API call; and
+4. replies with the callsign, or with what went wrong.
 
-Add `member-claims.create` only if the bot also delivers private participant claim links.
-
-## Flow
-
-1. Discord authenticates the user and supplies their Discord ID and roles.
-2. The bot maps Discord roles to configured OpenMeshTak role and group slugs.
-3. The bot sends an idempotent external-member `PUT` request.
-4. The bot reports the resolved membership or a safe sync issue.
-
-```js
-const response = await fetch(
-  `${process.env.OMTK_ORIGIN}/api/v1/events/${process.env.OMTK_EVENT_ID}` +
-    `/external-members/discord/${encodeURIComponent(discordUser.id)}`,
-  {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${process.env.OMTK_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      username: discordUser.username,
-      eventRole: mappedRoleSlug,
-      group: mappedGroupSlug,
-    }),
-  },
-);
+```text
+Participant ──/join──▶ Discord ──▶ your bot ──PUT external member──▶ OpenMeshTak
+            ◀──"You joined Bravo"───────────────◀────── member or sync issue
 ```
 
-Store the API key only in the bot's protected server environment. Do not put it in Discord messages, command arguments, browser code, or the repository.
+This does not create a login. The person becomes an event member identified by their Discord ID, nothing more. It is not "Sign in with Discord".
 
-This is not “Sign in with Discord.” It synchronizes an external identity and event membership but creates no login or browser session.
+## What the bot needs
+
+- An [API client](/api/#get-an-api-key) limited to this one event, with the permission `members.sync`.
+- The event's ID, and the slugs of the roles and groups you map to.
+- A table from Discord roles to OpenMeshTak slugs, kept in the bot's own configuration:
+
+| Discord role | OpenMeshTak role | OpenMeshTak group |
+| --- | --- | --- |
+| `Team Bravo` | `participant` | `bravo` |
+| `Team Bravo Lead` | `team-lead` | `bravo` |
+| `Medics` | `medic` | `medic` |
+
+OpenMeshTak never sees the Discord roles. The bot decides; the API only receives the result.
+
+## The call
+
+The bot sends one request per `/join`, the [external member sync](/api/examples/sync-members):
+
+```http
+PUT /api/v1/events/{eventId}/external-members/discord/{discordUserId}
+Authorization: Bearer <API key>
+Content-Type: application/json
+
+{ "username": "peter", "eventRole": "participant", "group": "bravo" }
+```
+
+It is safe to repeat. Running `/join` again after a role change updates the same member instead of creating a second one.
+
+## The reply
+
+The response has one of two shapes:
+
+| `outcome` | Meaning | What the bot could reply |
+| --- | --- | --- |
+| `member` | The person is a member. `change` says `created`, `updated` or `unchanged`; `member` holds the callsign. | "You joined Bravo as Peter." |
+| `sync-issue` | Something needs an organizer, for example a callsign conflict or an unknown group. The membership stays unchanged. | "An organizer needs to check your entry." |
+
+Organizers see open sync issues in the event's members view and can resolve them there.
+
+## Going further
+
+- **Web access:** a Discord member has no password. With the extra permission `member-claims.create`, the bot can create an [access link](/api/examples/participant-claims) and send it to the person in a direct message, never in a channel.
+- **Show the setup:** read the person's [profile](/api/examples/resolved-profiles) to reply with their radio name and channels.

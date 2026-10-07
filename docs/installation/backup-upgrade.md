@@ -1,35 +1,51 @@
 # Backup and upgrade
 
+All data of an installation lives in two places: the `core-data` Docker volume (database, uploads, certificates) and the `root_encryption_key` file. A backup needs both.
+
 ## Back up
 
-Back up both:
-
-- the complete `/server/data` volume; and
-- the separate `root_encryption_key` file.
-
-Stop writes while copying the volume:
+Run this in the directory with `docker-compose.yml`. Core stops for the copy, so nothing changes while it runs:
 
 ```sh
 docker compose stop core
-# Back up the openmeshtak_core-data volume and root_encryption_key.
+docker run --rm \
+  -v openmeshtak_core-data:/data:ro \
+  -v "$PWD":/backup \
+  alpine tar czf /backup/openmeshtak-$(date +%F).tar.gz -C /data .
 docker compose start core
 ```
 
-Encrypt backups and test restoration on a separate host.
+This creates `openmeshtak-<date>.tar.gz` next to the Compose file. Copy it, together with `root_encryption_key`, to another machine. Store the key apart from the archive: anyone with both can read every stored secret.
+
+## Restore
+
+Restore onto the same OpenMeshTak version that made the backup:
+
+```sh
+docker compose down
+docker volume rm openmeshtak_core-data
+docker volume create openmeshtak_core-data
+docker run --rm \
+  -v openmeshtak_core-data:/data \
+  -v "$PWD":/backup \
+  alpine tar xzf /backup/openmeshtak-2026-10-08.tar.gz -C /data
+docker compose up -d
+```
+
+Put the matching `root_encryption_key` next to `docker-compose.yml` before starting. Test a restore on a spare machine once, before you need it.
 
 ## Upgrade
 
 1. Read the release notes.
-2. Create a verified backup.
-3. Change `OPENMESHTAK_VERSION` in `.env` to the exact version you want to install.
-4. Pull and recreate the container.
+2. Make a backup as above.
+3. Set `OPENMESHTAK_VERSION` in `.env` to the new version.
+4. Start the new version:
 
-Keep the version pinned, for example `OPENMESHTAK_VERSION=0.1.9`. Do not use `latest` for a production installation: it can change what gets installed during an ordinary pull and makes upgrades and rollbacks harder to reproduce.
+   ```sh
+   docker compose pull
+   docker compose up -d
+   docker compose logs core
+   ```
 
-```sh
-docker compose pull
-docker compose up -d
-docker compose logs core
-```
+Core updates the database on its first start. To go back, restore the backup and set the old version again. Do not start an older version on a database that a newer one has already updated.
 
-Core applies database migrations during startup.

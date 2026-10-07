@@ -1,40 +1,34 @@
 # Troubleshooting
 
-## Core does not start
+Find the symptom, then follow the link to the page that explains the fix.
 
-```sh
-docker compose logs core
-docker compose ps
-```
+## Installation
 
-Check required secrets, the root key, database migrations, and occupied TAK ports.
+| Symptom | Where to look |
+| --- | --- |
+| Core does not start | Run `docker compose logs core`. A port in use: [TAK ports](/installation/tak-ports#check-the-ports-before-you-start). A missing `root_encryption_key`: [Install](/installation/#_3-create-the-root-key). |
+| The Web app is not reachable | [Reverse proxy](/installation/reverse-proxy#check-the-result) |
+| Live server log only updates slowly | The proxy does not pass WebSocket upgrades: [Reverse proxy](/installation/reverse-proxy#web-app-and-api) |
+| Password reset emails do not arrive | Email settings and test email: [Configure the installation](/installation/settings#general) |
 
-## Find a port conflict
+## TAK apps
 
-```sh
-sudo ss -tlnp
-docker ps --format 'table {{.Names}}\t{{.Ports}}'
-```
+| Symptom | Where to look |
+| --- | --- |
+| No QR code on the dashboard | The TAK server needs a publicly trusted certificate: [Server certificate](/installation/settings#server-certificate) |
+| Enrollment fails | Port `8446` must be reachable: [TAK ports](/installation/tak-ports#troubleshooting) |
+| ATAK connects, but no Data Packages | [TAK ports](/installation/tak-ports#troubleshooting) |
+| iTAK cannot list Data Packages | [TAK ports](/installation/tak-ports#different-data-package-port) |
+| Apps stopped connecting after a settings change | Devices keep the old address and ports: [Changing ports later](/installation/tak-ports#changing-ports-later) |
 
-Do not silently remap TAK ports. Follow the [TAK port guide](/installation/tak-ports).
+## Participants
 
-## ATAK still uses 8443
+| Symptom | Where to look |
+| --- | --- |
+| A setup or access link does not work | Links work once and expire. Create a new one: [Add members](/events/setup#_5-add-members) |
+| The dashboard says "No active event" | The person is not a member yet, or the event is still a draft: [Set up an event](/events/setup) |
+| A participant has no Meshtastic file | The event's Meshtastic configuration is not published yet: [Meshtastic](/events/meshtastic) |
 
-When ATAK should use another Marti port, repeat enrollment. The connection profile must be imported before ATAK can use the new port.
+## API
 
-## iTAK cannot list packages
-
-Make sure OpenMeshTak Marti is publicly reachable on `8443`.
-
-## API errors
-
-| Status | Meaning |
-| ---: | --- |
-| `401` | Missing or invalid authentication |
-| `403` | Permission or event scope missing |
-| `404` | Not found or hidden from this caller |
-| `409` | State or version conflict |
-| `422` | Invalid field or domain value |
-| `429` | Too many requests |
-
-Record the response `code` and `traceId`. Do not share the bearer token.
+Every error response contains a `traceId`. Look it up under **Settings → Server log**. Status codes are explained in [API basics](/api/#errors).
