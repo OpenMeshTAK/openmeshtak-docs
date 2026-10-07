@@ -24,29 +24,16 @@ Three kinds of port numbers appear in a deployment. Do not mix them up.
 
 QR codes, connection packages and enrollment profiles always use the ports entered on the **TAK server** page of the Web app. OpenMeshTak never takes them from the Docker mapping. When you change a mapping, enter the same public port on that page.
 
-## Check the ports before you start
+## Find a port conflict
 
-The Core repository contains a preflight script. Run it next to `docker-compose.yml` before `docker compose up`:
-
-```sh
-sh scripts/preflight.sh
-```
-
-It tries every port the deployment publishes and stops before anything starts. Ports of the running OpenMeshTak containers count as free, so the check also works for upgrades. A conflict looks like this:
-
-```text
-FAIL core 8443/tcp is in use. Free it, or publish Data Packages on another port such as "8484:8443" in docker-compose.yml and enter 8484 on the TAK server page.
-Port preflight failed: 1 conflict(s). Nothing was started.
-```
-
-To see which program owns a port yourself:
+If another program already uses one of the ports, `docker compose up` stops with "port is already allocated". To see which program owns a port:
 
 ```sh
 sudo ss -tlnp | grep -E ':(8446|8443|8089)\b'
 docker ps --format 'table {{.Names}}\t{{.Ports}}'
 ```
 
-If Core still cannot bind one of its ports, it does not start at all. A TAK server never runs with only some of its services.
+If Core cannot open one of its ports, it does not start at all. A TAK server never runs with only some of its services.
 
 ## When a port is already taken
 
@@ -167,7 +154,7 @@ The certificate must belong to the TAK host, not to another program such as a ho
 
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
-| Core does not start; log mentions a port in use | Another program owns one of the ports | Run the preflight script and pick an option above. |
+| `docker compose up` reports a port as already allocated | Another program owns one of the ports | [Find the program](#find-a-port-conflict) and pick an option above. |
 | Quick Connect fails immediately | `8446` is blocked or owned by another program | Check the firewall and `ss -tlnp`; keep `8446` on the TAK host. |
 | ATAK enrolls, but Data Packages fail and the server log shows no `/Marti` requests | ATAK still uses `8443` from an old setup or a failed profile import | Remove the server in ATAK and set it up again. Confirm the **TAK server** page shows the published port. |
 | iTAK shows an error for server Data Packages | Marti is not on public `8443` | Use a second address, move the other program, or SNI passthrough. |

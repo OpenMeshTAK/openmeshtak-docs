@@ -15,7 +15,7 @@ Create a directory on the server and save this file as `docker-compose.yml` ([do
 
 <<< @/public/examples/docker-compose.yml
 
-Next to it, save the [.env example](/examples/openmeshtak.env.example.txt) as `.env`, and copy `scripts/preflight.sh` from the [Core repository](https://github.com/OpenMeshTAK/openmeshtak) into a `scripts` folder.
+Next to it, save the [.env example](/examples/openmeshtak.env.example.txt) as `.env`.
 
 ## 2. Fill in `.env`
 
@@ -40,11 +40,10 @@ Copy this file to a safe place now. Without it, a backup cannot be restored. See
 ## 4. Start
 
 ```sh
-sh scripts/preflight.sh
 docker compose up -d
 ```
 
-The preflight script checks that every port is free before anything starts. If it reports a conflict, follow [TAK ports](/installation/tak-ports).
+If Docker reports that a port is already allocated, another program uses it; follow [TAK ports](/installation/tak-ports).
 
 Check that Core is running:
 
