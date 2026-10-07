@@ -1,0 +1,30 @@
+# OpenMeshTak Core 0.1.9 example deployment.
+# Keep this file and .env in the same directory.
+
+name: openmeshtak
+
+services:
+  core:
+    image: ghcr.io/openmeshtak/openmeshtak:${OPENMESHTAK_VERSION:-latest}
+    restart: unless-stopped
+    environment:
+      PUBLIC_ORIGIN: https://${PUBLIC_HOST:?Set PUBLIC_HOST in .env}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Set BETTER_AUTH_SECRET in .env}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      SWAGGER_ENABLED: ${SWAGGER_ENABLED:-false}
+    secrets:
+      - root_encryption_key
+    volumes:
+      - core-data:/server/data
+    ports:
+      - "127.0.0.1:8080:3000"
+      - "8446:8446"
+      - "8443:8443"
+      - "8089:8089"
+
+secrets:
+  root_encryption_key:
+    file: ./root_encryption_key
+
+volumes:
+  core-data:

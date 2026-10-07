@@ -1,0 +1,23 @@
+{
+  "name": "openmeshtak-docs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "license": "CC-BY-4.0",
+  "packageManager": "pnpm@10.12.4",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "licenses:check": "pnpm licenses list --json | node scripts/check-licenses.mjs",
+    "openapi:check": "node scripts/check-openapi.mjs",
+    "check": "pnpm licenses:check && pnpm openapi:check && pnpm docs:build"
+  },
+  "devDependencies": {
+    "@scalar/api-reference": "^1.73.0",
+    "vitepress": "^2.0.0-alpha.20"
+  }
+}

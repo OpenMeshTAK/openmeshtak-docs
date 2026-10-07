@@ -1,0 +1,60 @@
+:root {
+  --vp-layout-max-width: 100%;
+}
+
+.VPDoc .container,
+.VPDoc .content,
+.VPDoc .content-container {
+  max-width: none !important;
+}
+
+.instance-console {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  background: var(--vp-c-bg-soft);
+}
+
+.instance-console label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.instance-console__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.instance-console input {
+  min-width: min(100%, 24rem);
+  flex: 1;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-bg);
+}
+
+.instance-console button {
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  color: var(--vp-button-brand-text);
+  background: var(--vp-button-brand-bg);
+  font-weight: 600;
+}
+
+.instance-console__error {
+  margin: 0.75rem 0 0;
+  color: var(--vp-c-danger-1);
+}
+
+.scalar-reference {
+  margin-top: 2rem;
+  min-height: 60vh;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  overflow: hidden;
+}
