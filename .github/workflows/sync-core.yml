@@ -39,14 +39,18 @@ jobs:
         run: |
           latest="${REQUESTED:-$(gh release view --repo OpenMeshTAK/openmeshtak --json tagName --jq .tagName)}"
           latest="${latest#v}"
-          current="$(node -p "require('./docs/public/api/manifest.json').coreVersion")"
           echo "version=$latest" >> "$GITHUB_OUTPUT"
-          if [ "$latest" = "$current" ]; then
-            echo "Docs already use Core $current."
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
+          # Before a release the docs follow Core main, which is ahead of the newest release. Sync only
+          # a release that is newer than the docs, or the release of the version they already show.
+          changed="$(LATEST="$latest" node -p "
+            const m = require('./docs/public/api/manifest.json');
+            const n = (v) => v.split('.').map(Number);
+            const [a, b] = [n(process.env.LATEST), n(m.coreVersion)];
+            const order = a[0] - b[0] || a[1] - b[1] || a[2] - b[2];
+            order > 0 || (order === 0 && !m.release);
+          ")"
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+          echo "Newest release $latest, docs show $(node -p "require('./docs/public/api/manifest.json').sourceRef"): changed=$changed"
 
       - name: Sync and open a pull request
         if: steps.version.outputs.changed == 'true'

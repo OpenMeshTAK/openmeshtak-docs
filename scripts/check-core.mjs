@@ -20,20 +20,18 @@ if (openapi.info?.version !== manifest.coreVersion) {
   );
 }
 
-if (manifest.sourceTag !== `v${manifest.coreVersion}`) {
-  problems.push(`source tag ${manifest.sourceTag} does not match Core ${manifest.coreVersion}`);
+if (manifest.release && manifest.sourceRef !== `v${manifest.coreVersion}`) {
+  problems.push(`release ${manifest.sourceRef} does not match Core ${manifest.coreVersion}`);
 }
 
 if (sha256 !== manifest.sha256) {
   problems.push(`OpenAPI SHA-256 is ${sha256}, expected ${manifest.sha256}`);
 }
 
-// The install guide embeds this file; it must be the one from the same Core release.
+// The install guide embeds this file; it must come from the same Core source as the API document.
 const composeBytes = await readFile(new URL("../docs/public/examples/docker-compose.yml", import.meta.url));
-if (manifest.composeSha256 === undefined) {
-  console.warn(`docker-compose.yml is not synced from a release yet; run node scripts/sync-core.mjs <version>.`);
-} else if (createHash("sha256").update(composeBytes).digest("hex") !== manifest.composeSha256) {
-  problems.push(`docker-compose.yml differs from ${manifest.sourceTag}; run node scripts/sync-core.mjs ${manifest.coreVersion}`);
+if (createHash("sha256").update(composeBytes).digest("hex") !== manifest.composeSha256) {
+  problems.push(`docker-compose.yml differs from ${manifest.sourceRef}; run node scripts/sync-core.mjs again`);
 }
 
 const environmentExample = await readFile(new URL("../docs/public/examples/openmeshtak.env.example.txt", import.meta.url), "utf8");
@@ -54,6 +52,6 @@ if (problems.length > 0) {
   process.exitCode = 1;
 } else {
   console.log(
-    `OpenAPI ${openapi.info.version} verified (${Object.keys(openapi.paths).length} paths, SHA-256 ${sha256}).`,
+    `Core ${openapi.info.version} from ${manifest.sourceRef} verified (${Object.keys(openapi.paths).length} paths, compose included).`,
   );
 }

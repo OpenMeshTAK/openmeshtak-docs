@@ -23,18 +23,18 @@ pnpm check
 
 The check verifies dependency licenses, the pinned OpenAPI artifact, internal page and heading links, and the production build.
 
-## Update to a new Core release
+## Keep up with Core
 
-The API reference and the sample `docker-compose.yml` in the install guide come from a released Core tag, never from a moving checkout. Both are copied from the same tag:
+Until the next release, the docs describe the current development state of Core and the SDK. The API reference and the sample `docker-compose.yml` are copied together from Core:
 
 ```sh
-pnpm core:sync 0.1.10
+pnpm core:sync ../openmeshtak   # a local Core checkout, including unpushed commits
+pnpm core:sync main             # Core main on GitHub
+pnpm core:sync 0.1.10           # a release tag, for the published docs
 pnpm check
 ```
 
-The script downloads `openapi/openapi.json` and `docker-compose.yml` from `OpenMeshTAK/openmeshtak` at `v0.1.10`, pins the `.env` example to that version and records checksums in `docs/public/api/manifest.json`. `pnpm check` fails when a copied file no longer matches. The **Sync Core release** workflow does the same when a new Core release appears and opens a pull request. Version numbers in written pages come from the manifest through `{{ $coreVersion }}`.
-
-Keep written workflow guides separate from the generated reference. Guides explain goals, permissions, request order, errors, retries, and security. Scalar shows every operation and schema.
+The script records the source and checksums in `docs/public/api/manifest.json` and pins the `.env` example to the same version; `pnpm check` fails when a copied file no longer matches. When Core publishes a release, the **Sync Core release** workflow copies it from the tag and opens a pull request. Version numbers in written pages come from the manifest through `{{ $coreVersion }}`.
 
 ## Compatibility claims
 
