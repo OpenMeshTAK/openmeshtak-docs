@@ -15,6 +15,8 @@ The API covers:
 
 Use the [complete API reference](/api/reference) for every operation and schema. Use the [examples](/api/examples/) for common workflows.
 
+The reference shows the API of OpenMeshTak Core `0.1.9` and is read-only: it sends no requests and stores no credentials. Copy its `curl` examples and replace the server address with your own. You can also [download the OpenAPI document](/api/openapi-0.1.9.json).
+
 TypeScript and JavaScript integrations can also use the [SDK reference](/sdk/).
 
 ## Base URL
