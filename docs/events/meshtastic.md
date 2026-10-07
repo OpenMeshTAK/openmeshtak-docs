@@ -12,7 +12,7 @@ OpenMeshTak creates one settings file per participant for their Meshtastic radio
 
 Participants then download their file from the dashboard; see [Participant setup](/participants/).
 
-Only settings the chosen firmware supports are written to the file. Firmware versions tested on a real radio are marked **Tested on a device**; currently that is firmware `2.8.1` with the Meshtastic Android app.
+Only settings the chosen firmware supports are written to the file. Firmware versions tested on a real radio are marked **Tested on a device**; currently that is firmware <code>{{ $versions.firmware }}</code> with the Meshtastic Android app.
 
 ## Who gets which channel
 

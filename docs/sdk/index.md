@@ -3,7 +3,7 @@
 `@openmeshtak/sdk` is the official TypeScript and JavaScript client for the OpenMeshTak REST API.
 
 ::: warning Release status
-SDK `0.1.0` is prepared for OpenMeshTak API `>=0.1.9 <0.2.0`, but the package has not been published to npm yet. Use the [REST API](/api/) until the first SDK release is available.
+SDK <code>{{ $versions.sdk }}</code> is prepared for OpenMeshTak API <code>{{ $versions.sdkApiRange }}</code>, but the package has not been published to npm yet. Use the [REST API](/api/) until the first SDK release is available.
 :::
 
 ## Installation
@@ -107,4 +107,4 @@ import {
 } from "@openmeshtak/sdk";
 ```
 
-For the prepared first release these values are `0.1.9`, `0.1.0`, and `>=0.1.9 <0.2.0` respectively.
+For the prepared first release these values are <code>{{ $versions.sdkOpenapiSource }}</code>, <code>{{ $versions.sdk }}</code>, and <code>{{ $versions.sdkApiRange }}</code> respectively.

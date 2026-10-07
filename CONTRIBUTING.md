@@ -11,6 +11,8 @@ Pages live below `docs/`. Navigation lives in `docs/.vitepress/config.ts`. The g
 
 Every fact has one home. Link to that page instead of repeating ports, tested versions, error codes or secret-handling rules.
 
+Never type a version number into a page. The Core version comes from the manifest as `{{ $coreVersion }}`; tested app and firmware versions and the SDK version live in `docs/.vitepress/versions.ts` and appear as `{{ $versions.atak }}` and so on. After a new real-device test, change the value there once.
+
 Write the useful result first. Prefer a short support statement, command, decision, or warning over a history of how it was discovered. Keep one task per page and explain technical terms when they first appear.
 
 ## Before submitting

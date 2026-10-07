@@ -114,10 +114,10 @@ What happens for an ATAK participant:
 
 This is a setting delivered by the profile, not a redirect from `8443`. ATAK never contacts the program on `8443`. If the profile cannot be downloaded or imported, the enrollment has failed and must be repeated.
 
-Tested with ATAK-CIV `5.6.0.12` on Android 16.
+Tested with ATAK-CIV <code>{{ $versions.atak }}</code> on Android {{ $versions.android }}.
 
 ::: warning iTAK requires public Marti port 8443
-iTAK `2.12.3` ignores the delivered port and always requests Data Packages on `8443`. With a different Data Package port, iTAK still connects and exchanges CoT on `8089`, but cannot list or download server Data Packages. If participants use iTAK, use one of the options above instead.
+iTAK <code>{{ $versions.itak }}</code> ignores the delivered port and always requests Data Packages on `8443`. With a different Data Package port, iTAK still connects and exchanges CoT on `8089`, but cannot list or download server Data Packages. If participants use iTAK, use one of the options above instead.
 :::
 
 ::: warning One Data Package port per ATAK device
@@ -167,5 +167,3 @@ To roll back, restore the previous `docker-compose.yml` mapping and **TAK server
 The ATAK behavior above follows the official ATAK source: [`SslNetCotPort`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/comms/SslNetCotPort.java) (default ports), [`CertificateEnrollmentClient`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/net/CertificateEnrollmentClient.java) and [`DeviceProfileOperation`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/net/DeviceProfileOperation.java) (enrollment and profile download), and [`CotMapComponent`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/android/cot/CotMapComponent.java) (`apiSecureServerPort`). SNI passthrough is described in the [NGINX `ssl_preread`](https://nginx.org/en/docs/stream/ngx_stream_ssl_preread_module.html) and [HAProxy SNI](https://www.haproxy.com/blog/enhanced-ssl-load-balancing-with-server-name-indication-sni-tls-extension/) documentation.
 
 Source code alone is not a compatibility result. All tested app versions are listed in [TAK apps](/participants/tak-apps#tested-versions).
-
-Written for OpenMeshTak `0.1.9`.

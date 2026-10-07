@@ -6,8 +6,8 @@ Participants connect ATAK on Android or iTAK on iPhone. How depends on what the 
 
 | App | Version | Platform |
 | --- | --- | --- |
-| ATAK-CIV | `5.6.0.12` | Android 16 |
-| iTAK | `2.12.3` | iOS 26 |
+| ATAK-CIV | <code>{{ $versions.atak }}</code> | Android {{ $versions.android }} |
+| iTAK | <code>{{ $versions.itak }}</code> | iOS {{ $versions.ios }} |
 
 Other versions may work but have not been tested.
 
