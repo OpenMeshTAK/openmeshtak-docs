@@ -80,5 +80,6 @@ export default defineConfig({
     socialLinks: [{ icon: "github", link: "https://github.com/OpenMeshTAK" }],
     footer: { message: "OpenMeshTak documentation is licensed under CC BY 4.0." },
     outline: { level: [2, 3] },
+    lastUpdated: { text: "Last updated", formatOptions: { dateStyle: "medium" } },
   },
 });
