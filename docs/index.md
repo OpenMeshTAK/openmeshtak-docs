@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: OpenMeshTak
-  text: Events for TAK and Meshtastic
+  text: Self-hosted TAK and Meshtastic provisioning
   tagline: Set up an event once. Every participant gets their own TAK connection, radio profile and maps.
   image:
     src: /logo.svg
