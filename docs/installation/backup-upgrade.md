@@ -38,7 +38,7 @@ Put the matching `root_encryption_key` next to `docker-compose.yml` before start
 
 1. Read the release notes.
 2. Make a backup as above.
-3. Set `OPENMESHTAK_VERSION` in `.env` to the new version.
+3. If you use a fixed version, set `OPENMESHTAK_VERSION` in `.env` to the new one. With `latest`, skip this step.
 4. Start the new version:
 
    ```sh

@@ -21,10 +21,14 @@ Next to it, save the [.env example](/examples/openmeshtak.env.example.txt) as `.
 
 | Setting | Value |
 | --- | --- |
-| `OPENMESHTAK_VERSION` | The exact release, for example {{ $coreVersion }}. Never `latest`, so upgrades only happen when you choose. |
+| `OPENMESHTAK_VERSION` | Optional. Without it, the newest release (`latest`) runs. Set an exact release such as {{ $coreVersion }} to upgrade only when you choose. |
 | `PUBLIC_HOST` | The public DNS name without `https://`, for example `tak.example.org`. |
 
 Keep `.env` private and out of version control.
+
+::: tip latest or a fixed version?
+With `latest`, every `docker compose pull` can bring a new version, and OpenMeshTak updates its database on the next start. That is convenient, but make a [backup](/installation/backup-upgrade) before pulling. A fixed version only changes when you edit `.env`, so nothing updates by surprise, for example shortly before an event.
+:::
 
 ## 3. Create the root key
 
