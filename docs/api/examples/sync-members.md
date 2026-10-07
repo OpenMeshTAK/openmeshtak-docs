@@ -2,7 +2,9 @@
 
 Requires `members.sync` for the event.
 
-```sh
+::: code-group
+
+```sh [curl]
 export EXTERNAL_ID="123456789012345678"
 
 curl --fail-with-body --silent --show-error \
@@ -16,6 +18,20 @@ curl --fail-with-body --silent --show-error \
     "group": "bravo"
   }'
 ```
+
+```ts [SDK]
+const result = await client.upsertExternalMember(eventId, "discord", "123456789012345678", {
+  username: "peter",
+  eventRole: "participant",
+  group: "bravo",
+});
+
+if (result.outcome === "member") {
+  console.log(result.member.callsign);
+}
+```
+
+:::
 
 This request is safe to repeat. It creates or updates the same external identity and event membership.
 

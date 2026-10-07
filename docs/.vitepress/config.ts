@@ -67,7 +67,15 @@ export default defineConfig({
               { text: "Work with Data Packages", link: "/api/examples/data-packages" },
             ],
           },
-          { text: "SDK", link: "/sdk/" },
+          {
+            text: "SDK",
+            link: "/sdk/",
+            collapsed: true,
+            items: [
+              { text: "SDK basics", link: "/sdk/" },
+              { text: "SDK methods", link: "/sdk/methods" },
+            ],
+          },
           { text: "Reference", link: "/api/reference" },
         ],
       },

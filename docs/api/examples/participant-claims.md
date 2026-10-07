@@ -2,7 +2,9 @@
 
 Requires `member-claims.create` for an active event.
 
-```sh
+::: code-group
+
+```sh [curl]
 export MEMBER_ID="replace-with-member-id"
 
 curl --fail-with-body --silent --show-error \
@@ -10,6 +12,13 @@ curl --fail-with-body --silent --show-error \
   -H "Authorization: Bearer $OMTK_API_KEY" \
   "$OMTK_ORIGIN/api/v1/events/$EVENT_ID/members/$MEMBER_ID/claims"
 ```
+
+```ts [SDK]
+const { claimUrl } = await client.createMemberClaim(eventId, memberId);
+// Send claimUrl privately to the participant.
+```
+
+:::
 
 Example response:
 

@@ -2,7 +2,9 @@
 
 Create a participant role:
 
-```sh
+::: code-group
+
+```sh [curl]
 curl --fail-with-body --silent --show-error \
   -X POST \
   -H "Authorization: Bearer $OMTK_API_KEY" \
@@ -15,6 +17,17 @@ curl --fail-with-body --silent --show-error \
     "takRoleOverride": null
   }'
 ```
+
+```ts [SDK]
+await client.createEventRole(eventId, {
+  name: "Participant",
+  slug: "participant",
+  description: "Standard event participant",
+  takRoleOverride: null,
+});
+```
+
+:::
 
 Create a Bravo group:
 

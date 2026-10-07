@@ -41,13 +41,25 @@ OpenMeshTak never sees the Discord roles. The bot decides; the API only receives
 
 The bot sends one request per `/join`, the [external member sync](/api/examples/sync-members):
 
-```http
+::: code-group
+
+```http [HTTP]
 PUT /api/v1/events/{eventId}/external-members/discord/{discordUserId}
 Authorization: Bearer <API key>
 Content-Type: application/json
 
 { "username": "peter", "eventRole": "participant", "group": "bravo" }
 ```
+
+```ts [SDK]
+const result = await client.upsertExternalMember(eventId, "discord", discordUserId, {
+  username: "peter",
+  eventRole: "participant",
+  group: "bravo",
+});
+```
+
+:::
 
 It is safe to repeat. Running `/join` again after a role change updates the same member instead of creating a second one.
 

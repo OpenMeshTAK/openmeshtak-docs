@@ -2,7 +2,9 @@
 
 Requires instance-wide `events.manage`.
 
-```sh
+::: code-group
+
+```sh [curl]
 curl --fail-with-body --silent --show-error \
   -X POST \
   -H "Authorization: Bearer $OMTK_API_KEY" \
@@ -18,6 +20,21 @@ curl --fail-with-body --silent --show-error \
     "permanentAccounts": false
   }'
 ```
+
+```ts [SDK]
+const event = await client.createEvent({
+  name: "LightSim 2027",
+  slug: "lightsim-2027",
+  timeZone: "Europe/Berlin",
+  startsAt: "2027-05-01T08:00:00.000Z",
+  endsAt: "2027-05-02T18:00:00.000Z",
+  takLoginTokenDays: 0,
+  permanentAccounts: false,
+});
+const eventId = event.id;
+```
+
+:::
 
 The response is the new event in `draft` state. Save its `id` for later requests:
 
