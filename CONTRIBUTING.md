@@ -21,15 +21,16 @@ pnpm check
 
 The check verifies dependency licenses, the pinned OpenAPI artifact, internal page and heading links, and the production build.
 
-## Update the API reference
+## Update to a new Core release
 
-The hosted reference must use a released Core contract, never an arbitrary moving checkout.
+The API reference and the sample `docker-compose.yml` in the install guide come from a released Core tag, never from a moving checkout. Both are copied from the same tag:
 
-1. Check out the intended `OpenMeshTAK/openmeshtak` release tag.
-2. Copy its `openapi/openapi.json` to `docs/public/api/openapi-<version>.json`.
-3. Update `docs/public/api/manifest.json`, including the SHA-256 checksum.
-4. Update the URL and displayed version in `ScalarApiReference.vue` and `docs/api/index.md`.
-5. Run `pnpm openapi:check` and `pnpm check`.
+```sh
+pnpm core:sync 0.1.10
+pnpm check
+```
+
+The script downloads `openapi/openapi.json` and `docker-compose.yml` from `OpenMeshTAK/openmeshtak` at `v0.1.10`, pins the `.env` example to that version and records checksums in `docs/public/api/manifest.json`. `pnpm check` fails when a copied file no longer matches. The **Sync Core release** workflow does the same when a new Core release appears and opens a pull request. Version numbers in written pages come from the manifest through `{{ $coreVersion }}`.
 
 Keep written workflow guides separate from the generated reference. Guides explain goals, permissions, request order, errors, retries, and security. Scalar shows every operation and schema.
 

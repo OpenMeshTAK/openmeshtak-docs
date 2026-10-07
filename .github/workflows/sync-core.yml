@@ -1,0 +1,71 @@
+name: Sync Core release
+
+# Pulls the OpenAPI document and the sample docker-compose.yml of the newest Core release into the
+# docs and opens a pull request. The normal check then runs on that pull request before a merge.
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Core version to sync, for example 0.1.10 (default newest release)
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-core
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Choose the Core version
+        id: version
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REQUESTED: ${{ inputs.version }}
+        run: |
+          latest="${REQUESTED:-$(gh release view --repo OpenMeshTAK/openmeshtak --json tagName --jq .tagName)}"
+          latest="${latest#v}"
+          current="$(node -p "require('./docs/public/api/manifest.json').coreVersion")"
+          echo "version=$latest" >> "$GITHUB_OUTPUT"
+          if [ "$latest" = "$current" ]; then
+            echo "Docs already use Core $current."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Sync and open a pull request
+        if: steps.version.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          branch="sync/core-$VERSION"
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null; then
+            echo "A pull request branch for Core $VERSION already exists."
+            exit 0
+          fi
+          pnpm core:sync "$VERSION"
+          pnpm check
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add docs/public
+          git commit -m "docs(api): sync Core $VERSION"
+          git push origin "$branch"
+          gh pr create --title "docs(api): sync Core $VERSION" \
+            --body "Copies the OpenAPI document and docker-compose.yml from OpenMeshTAK/openmeshtak@v$VERSION. Review the install guide and the reference before merging."

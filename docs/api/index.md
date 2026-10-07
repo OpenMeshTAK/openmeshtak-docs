@@ -70,6 +70,6 @@ Let your program react to `status` or `code`, not to the message text. When aski
 
 ## Reference
 
-The [API reference](/api/reference) shows every operation of OpenMeshTak `0.1.9`. It only displays the API and sends no requests. You can also [download the OpenAPI document](/api/openapi-0.1.9.json) for code generators.
+The [API reference](/api/reference) shows every operation of OpenMeshTak {{ $coreVersion }}. It only displays the API and sends no requests. You can also <a :href="$openapiUrl" download>download the OpenAPI document</a> for code generators.
 
 For TypeScript and JavaScript, the [SDK](/sdk/) wraps these calls.

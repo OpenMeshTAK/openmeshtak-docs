@@ -28,13 +28,27 @@ if (sha256 !== manifest.sha256) {
   problems.push(`OpenAPI SHA-256 is ${sha256}, expected ${manifest.sha256}`);
 }
 
+// The install guide embeds this file; it must be the one from the same Core release.
+const composeBytes = await readFile(new URL("../docs/public/examples/docker-compose.yml", import.meta.url));
+if (manifest.composeSha256 === undefined) {
+  console.warn(`docker-compose.yml is not synced from a release yet; run node scripts/sync-core.mjs <version>.`);
+} else if (createHash("sha256").update(composeBytes).digest("hex") !== manifest.composeSha256) {
+  problems.push(`docker-compose.yml differs from ${manifest.sourceTag}; run node scripts/sync-core.mjs ${manifest.coreVersion}`);
+}
+
+const environmentExample = await readFile(new URL("../docs/public/examples/openmeshtak.env.example.txt", import.meta.url), "utf8");
+if (!environmentExample.includes(`OPENMESHTAK_VERSION=${manifest.coreVersion}
+`)) {
+  problems.push(`the .env example does not pin OPENMESHTAK_VERSION=${manifest.coreVersion}`);
+}
+
 if (Object.keys(openapi.paths ?? {}).length === 0) {
   problems.push("OpenAPI document contains no paths");
 }
 
 if (problems.length > 0) {
   for (const problem of problems) {
-    console.error(`OpenAPI check failed: ${problem}`);
+    console.error(`Core artifact check failed: ${problem}`);
   }
 
   process.exitCode = 1;

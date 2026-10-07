@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from "vue";
 import { useData, withBase } from "vitepress";
+import manifest from "../../public/api/manifest.json";
 
 const container = ref<HTMLElement | null>(null);
 const { isDark } = useData();
@@ -12,7 +13,7 @@ let reference: { destroy: () => void } | null = null;
  */
 function configuration() {
   return {
-    url: withBase("/api/openapi-0.1.9.json"),
+    url: withBase(`/api/${manifest.openapiFile}`),
     agent: { disabled: true },
     mcp: { disabled: true },
     // The contract's relative server would resolve to the docs site; show a placeholder instead.

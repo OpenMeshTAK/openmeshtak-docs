@@ -11,18 +11,17 @@ OpenMeshTak runs as one container. It serves the Web app, the API and the built-
 
 ## 1. Get the files
 
-Put these two files in one directory on the server:
+Create a directory on the server and save this file as `docker-compose.yml` ([download](/examples/docker-compose.yml)). It is the sample deployment of OpenMeshTak {{ $coreVersion }}, copied unchanged from the release:
 
-- [docker-compose.yml](/examples/docker-compose.yml), the sample deployment of OpenMeshTak `0.1.9`;
-- [.env example](/examples/openmeshtak.env.example.txt), saved as `.env`.
+<<< @/public/examples/docker-compose.yml
 
-Also copy `scripts/preflight.sh` from the [Core repository](https://github.com/OpenMeshTAK/openmeshtak) into a `scripts` folder next to them.
+Next to it, save the [.env example](/examples/openmeshtak.env.example.txt) as `.env`, and copy `scripts/preflight.sh` from the [Core repository](https://github.com/OpenMeshTAK/openmeshtak) into a `scripts` folder.
 
 ## 2. Fill in `.env`
 
 | Setting | Value |
 | --- | --- |
-| `OPENMESHTAK_VERSION` | The exact release, for example `0.1.9`. Never `latest`, so upgrades only happen when you choose. |
+| `OPENMESHTAK_VERSION` | The exact release, for example {{ $coreVersion }}. Never `latest`, so upgrades only happen when you choose. |
 | `PUBLIC_HOST` | The public DNS name without `https://`, for example `tak.example.org`. |
 
 Keep `.env` private and out of version control.
