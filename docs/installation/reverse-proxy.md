@@ -5,7 +5,7 @@ OpenMeshTak has two kinds of public traffic, and they are handled differently:
 - **Web app and API** on `https://tak.example.org`: your reverse proxy terminates HTTPS and forwards plain HTTP to Core.
 - **TAK traffic** on `8446`, `8443` and `8089`: goes straight to Core, which handles TLS itself. See [TAK ports](/installation/tak-ports).
 
-A **reverse proxy** is the web server that already answers on ports `80` and `443`, such as nginx, Caddy or a hosting panel. It holds the public HTTPS certificate and forwards requests to programs on the same machine.
+A **reverse proxy** is the web server that already answers on ports `80` and `443`, such as nginx, Caddy or the web server of a hosting panel. It holds the public HTTPS certificate and forwards requests to programs on the same machine.
 
 ## Web app and API
 
@@ -80,12 +80,6 @@ tak.example.org {
 ```
 
 Caddy forwards the headers and WebSocket upgrades automatically. Ports `80` and `443` must be reachable from the internet so Let's Encrypt can verify the name.
-
-### CloudPanel
-
-Create a **Reverse Proxy** site for `tak.example.org` with the reverse proxy URL `http://127.0.0.1:8080`, then issue a Let's Encrypt certificate for the site. Open the site's **Vhost** editor and check that the `location /` block passes the `Upgrade` and `Connection` headers as in the nginx example above.
-
-If CloudPanel also blocks TAK port `8443`, see [CloudPanel](/installation/tak-ports#cloudpanel) on the TAK ports page.
 
 ## TAK traffic
 

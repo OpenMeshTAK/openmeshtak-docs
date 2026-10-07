@@ -78,7 +78,20 @@ This is the recommended fix for every port, and the only clean fix when `8446` o
 
 ### 3. Move the other program to a private address
 
-Some programs only need to be reachable through another route, for example a hosting panel that you already open through a normal web address on `443`. Move that program to `127.0.0.1` and publish Core on the public address only. See [CloudPanel](#cloudpanel) for a worked example.
+Some programs only need to be reachable through another route, for example a hosting panel that you already open through a normal web address on `443`. If that program can listen on `127.0.0.1` instead of all addresses, the public port becomes free for Core.
+
+Then publish Core on the public address only:
+
+```yaml
+ports:
+  - "8446:8446"
+  - "203.0.113.10:8443:8443"
+  - "8089:8089"
+```
+
+A plain `"8443:8443"` also binds `127.0.0.1` and collides with the program there. Add an IPv6 mapping only if the TAK host has an AAAA record.
+
+Check with `sudo ss -tlnp | grep 8443` that the other program listens only on `127.0.0.1` or `[::1]`. Repeat the check after updating that program: an update may restore its public listener, and Core then no longer starts.
 
 ### 4. Share 8443 with SNI passthrough
 
@@ -126,38 +139,6 @@ ATAK stores the Data Package port once for the whole app, not per server. A devi
 
 Do not move `8446` or `8089` unless there is no other way. The Web app warns you, because participants then have to enter the ports by hand and Quick Connect no longer works as described.
 
-## CloudPanel
-
-CloudPanel serves its own administration on public `8443` and has no setting to change it. If you already open the panel through a CloudPanel custom domain on `443`, the panel only needs to listen on loopback:
-
-1. Back up `/home/clp/services/nginx/sites-enabled/cloudpanel.conf`.
-2. Change `listen 8443 ssl http2;` to `listen 127.0.0.1:8443 ssl http2;` and `listen [::]:8443 ssl http2;` to `listen [::1]:8443 ssl http2;`.
-3. Run `sudo systemctl restart clp-nginx`. A reload cannot change the listening address.
-4. Check that the panel now listens only on loopback and the panel domain still works:
-
-   ```sh
-   sudo ss -tlnp | grep 8443
-   ```
-
-5. Publish Core's Marti port on the public address only:
-
-   ```yaml
-   ports:
-     - "8446:8446"
-     - "203.0.113.10:8443:8443"
-     - "8089:8089"
-   ```
-
-   A plain `"8443:8443"` also binds loopback and collides with the panel. Add an IPv6 mapping only if the TAK host has an AAAA record.
-
-6. Set **Data Package port** to `8443` on the **TAK server** page.
-
-Tested with iTAK `2.12.3`.
-
-This edits a file that CloudPanel generates and is not a setting supported by CloudPanel. An update may restore the public listener; Core then fails to start. Check `ss -tlnp | grep 8443` after every CloudPanel update and repeat the steps if needed.
-
-If you cannot change CloudPanel, an SNI router on the same address cannot help either, because both would need public `8443`. Use a second address, or the different Data Package port from option 5 for ATAK-only events.
-
 ## Changing ports later
 
 Devices keep the address and ports they were set up with. When you change the host name or a port on the **TAK server** page, the Web app:
@@ -196,7 +177,7 @@ To roll back, restore the previous `docker-compose.yml` mapping and **TAK server
 
 ## Background
 
-The ATAK behavior above follows the official ATAK source: [`SslNetCotPort`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/comms/SslNetCotPort.java) (default ports), [`CertificateEnrollmentClient`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/net/CertificateEnrollmentClient.java) and [`DeviceProfileOperation`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/net/DeviceProfileOperation.java) (enrollment and profile download), and [`CotMapComponent`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/android/cot/CotMapComponent.java) (`apiSecureServerPort`). SNI passthrough is described in the [NGINX `ssl_preread`](https://nginx.org/en/docs/stream/ngx_stream_ssl_preread_module.html) and [HAProxy SNI](https://www.haproxy.com/blog/enhanced-ssl-load-balancing-with-server-name-indication-sni-tls-extension/) documentation. The CloudPanel port is listed in the [CloudPanel documentation](https://www.cloudpanel.io/docs/v2/getting-started/other/#access-cloudpanel).
+The ATAK behavior above follows the official ATAK source: [`SslNetCotPort`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/comms/SslNetCotPort.java) (default ports), [`CertificateEnrollmentClient`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/net/CertificateEnrollmentClient.java) and [`DeviceProfileOperation`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/net/DeviceProfileOperation.java) (enrollment and profile download), and [`CotMapComponent`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/android/cot/CotMapComponent.java) (`apiSecureServerPort`). SNI passthrough is described in the [NGINX `ssl_preread`](https://nginx.org/en/docs/stream/ngx_stream_ssl_preread_module.html) and [HAProxy SNI](https://www.haproxy.com/blog/enhanced-ssl-load-balancing-with-server-name-indication-sni-tls-extension/) documentation.
 
 Source code alone is not a compatibility result. The versions on this page are the ones tested; see [Compatibility](/compatibility/).
 
