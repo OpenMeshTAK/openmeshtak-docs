@@ -11,7 +11,7 @@ OpenMeshTak runs as one container. It serves the Web app, the API and the built-
 
 ## 1. Get the files
 
-Create a directory on the server and save this file as `docker-compose.yml` ([download](/examples/docker-compose.yml)). It is the sample deployment of OpenMeshTak {{ $coreVersion }}, copied unchanged from the release:
+Create a directory on the server and save this file as `docker-compose.yml` ([download](/examples/docker-compose.yml)):
 
 <<< @/public/examples/docker-compose.yml
 

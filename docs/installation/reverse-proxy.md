@@ -1,44 +1,32 @@
-# Reverse proxy and TLS
+# Reverse proxy
 
-OpenMeshTak has two kinds of public traffic, and they are handled differently:
+Browsers reach the Web app over HTTPS. OpenMeshTak itself does not handle that: a web server in front of it, the **reverse proxy**, holds the HTTPS certificate and passes requests on to OpenMeshTak.
 
-- **Web app and API** on `https://tak.example.org`: your reverse proxy terminates HTTPS and forwards plain HTTP to Core.
-- **TAK traffic** on `8446`, `8443` and `8089`: goes straight to Core, which handles TLS itself. See [TAK ports](/installation/tak-ports).
-
-A **reverse proxy** is the web server that already answers on ports `80` and `443`, such as nginx, Caddy or the web server of a hosting panel. It holds the public HTTPS certificate and forwards requests to programs on the same machine.
-
-## Web app and API
-
-The shipped `docker-compose.yml` publishes the Web app and API only on the server itself:
-
-```yaml
-ports:
-  - "127.0.0.1:8080:3000"
+```text
+Browser ──HTTPS :443──▶ reverse proxy ──HTTP──▶ 127.0.0.1:8080 (OpenMeshTak)
 ```
 
-Point your reverse proxy for `PUBLIC_HOST` at `http://127.0.0.1:8080`. The proxy must:
+The sample `docker-compose.yml` already publishes OpenMeshTak on `127.0.0.1:8080`, reachable only from the server itself. You only set up the proxy.
 
-- serve HTTPS with a publicly trusted certificate, for example from Let's Encrypt;
-- forward the original host name and the `X-Forwarded-For` and `X-Forwarded-Proto` headers;
-- pass WebSocket upgrades for `/api/realtime`. Without them, the live server log falls back to slower HTTP long-polling; and
-- allow request bodies up to 64 MB, the largest Data Package upload Core accepts.
+This page is only about the Web app and API. ATAK and iTAK do not go through the proxy; they connect to OpenMeshTak directly on their own ports, see [TAK ports](/installation/tak-ports).
 
-`PUBLIC_HOST` in `.env` must be exactly the host name the browser uses. Sign-in, passkeys and links in emails and QR codes depend on it.
+## Choose one
 
-### Let Core see real client addresses
+### No web server yet: Caddy
 
-Behind a proxy, every request reaches Core from the proxy's address, so all visitors would share one rate limit, for example for claim links, setup links and API keys. The shipped `docker-compose.yml` therefore sets `TRUST_PROXY`:
+Caddy gets and renews the HTTPS certificate by itself. Install Caddy, then use this as the complete `Caddyfile`:
 
-```yaml
-environment:
-  TRUST_PROXY: ${TRUST_PROXY:-true}
+```text
+tak.example.org {
+    reverse_proxy 127.0.0.1:8080
+}
 ```
 
-Core then takes the client address from the last `X-Forwarded-For` entry, the one your proxy adds. Earlier entries come from the visitor and are ignored, so nobody can fake their address by sending the header themselves.
+Ports `80` and `443` must be reachable from the internet so Let's Encrypt can check the name.
 
-This is only safe while port `8080` is published on `127.0.0.1` and one proxy sits in front of Core. If anything other than your proxy can reach port `8080`, set `TRUST_PROXY=false` in `.env`.
+### nginx already runs
 
-### nginx
+Add a site for the host name. Replace the certificate paths with yours:
 
 ```nginx
 server {
@@ -63,49 +51,31 @@ server {
     }
 }
 
-# In the http block, once:
+# Once, in the http block:
 map $http_upgrade $connection_upgrade {
     default upgrade;
     ''      close;
 }
 ```
 
+### A hosting panel or another proxy
 
-### Caddy
+Create a reverse-proxy site for the host name that points to `http://127.0.0.1:8080`, and give it a Let's Encrypt certificate. Then check that it does what the nginx example does:
 
-If the server has no web server yet, Caddy gets and renews a Let's Encrypt certificate by itself. A complete `Caddyfile`:
+- passes the original host name and the `X-Forwarded-For` and `X-Forwarded-Proto` headers;
+- passes WebSocket upgrades (`Upgrade` and `Connection` headers); and
+- accepts uploads up to 64 MB.
 
-```text
-tak.example.org {
-    reverse_proxy 127.0.0.1:8080
-}
-```
-
-Caddy forwards the headers and WebSocket upgrades automatically. Ports `80` and `443` must be reachable from the internet so Let's Encrypt can verify the name.
-
-## TAK traffic
-
-Never send TAK ports through an HTTP reverse proxy. Each device proves who it is with its own client certificate, and only Core may check it. A proxy that terminates TLS would hide that certificate.
-
-If two TLS services must share one public port, use layer-4 SNI passthrough as described in [TAK ports](/installation/tak-ports#sni-passthrough). The router may read the host name but must forward the original TLS connection unchanged.
-
-## Certificates
-
-The Web certificate and the TAK certificate are separate.
-
-- **Web**: your reverse proxy's certificate for `PUBLIC_HOST`. Core never sees it.
-- **TAK server certificate**: chosen on the **TAK server** page. It can be created by the OpenMeshTak certificate authority (CA), uploaded as a publicly trusted certificate, or obtained and renewed by Core through ACME with a Cloudflare DNS challenge.
-- **Client certificates**: always issued by the OpenMeshTak TAK CA during enrollment.
-
-The TAK host can use the same name as the Web app. With a publicly trusted TAK certificate, devices do not need to trust an extra CA for the server.
-
-## Check the result
+## Check
 
 ```sh
 curl --fail https://tak.example.org/api/v1/health
-curl -sI https://tak.example.org/ | head -n 1
 ```
 
-Both must succeed without certificate warnings. Then sign in to the Web app and open **Settings → Server log**. New lines should appear without reloading the page.
+It must succeed without a certificate warning. Then sign in, open **Settings → Server log** and watch new lines appear without reloading. If they only appear after a reload, the proxy does not pass WebSocket upgrades.
 
-Written for OpenMeshTak `0.1.9`.
+## Good to know
+
+- `PUBLIC_HOST` in `.env` must be exactly the name in the browser's address bar. Sign-in, passkeys and links in emails and QR codes use it.
+- The sample compose file sets `TRUST_PROXY=true`, so OpenMeshTak sees each visitor's real address from your proxy. That is only safe while port `8080` stays on `127.0.0.1`. If anything else can reach it, set `TRUST_PROXY=false` in `.env`.
+- The certificate here is only for the Web app. The TAK server has its own; see [Configure the installation](/installation/settings#server-certificate).

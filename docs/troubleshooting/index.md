@@ -7,8 +7,8 @@ Find the symptom, then follow the link to the page that explains the fix.
 | Symptom | Where to look |
 | --- | --- |
 | Core does not start | Run `docker compose logs core`. A port in use: [TAK ports](/installation/tak-ports#check-the-ports-before-you-start). A missing `root_encryption_key`: [Install](/installation/#_3-create-the-root-key). |
-| The Web app is not reachable | [Reverse proxy](/installation/reverse-proxy#check-the-result) |
-| Live server log only updates slowly | The proxy does not pass WebSocket upgrades: [Reverse proxy](/installation/reverse-proxy#web-app-and-api) |
+| The Web app is not reachable | [Reverse proxy](/installation/reverse-proxy#check) |
+| Live server log only updates slowly | The proxy does not pass WebSocket upgrades: [Reverse proxy](/installation/reverse-proxy#check) |
 | Password reset emails do not arrive | Email settings and test email: [Configure the installation](/installation/settings#general) |
 
 ## TAK apps
