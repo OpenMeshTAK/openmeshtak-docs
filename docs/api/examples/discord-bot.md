@@ -11,10 +11,15 @@ A participant types `/join` in your Discord server. Your bot then:
 3. adds the person to the event with one API call; and
 4. replies with the callsign, or with what went wrong.
 
-```text
-Participant ──/join──▶ Discord ──▶ your bot ──PUT external member──▶ OpenMeshTak
-            ◀──"You joined Bravo"───────────────◀────── member or sync issue
-```
+<div class="flow">
+  <div class="flow-step"><strong>Participant</strong><span>types <code>/join</code> in Discord</span></div>
+  <div class="flow-arrow" aria-hidden="true">→</div>
+  <div class="flow-step"><strong>Your bot</strong><span>maps the Discord roles to a role and group</span></div>
+  <div class="flow-arrow" aria-hidden="true">→</div>
+  <div class="flow-step"><strong>OpenMeshTak</strong><span><code>PUT</code> external member returns the member or a sync issue</span></div>
+  <div class="flow-arrow" aria-hidden="true">→</div>
+  <div class="flow-step"><strong>Your bot</strong><span>replies “You joined Bravo”</span></div>
+</div>
 
 This does not create a login. The person becomes an event member identified by their Discord ID, nothing more. It is not "Sign in with Discord".
 

@@ -24,3 +24,45 @@
 .VPDoc .aside-curtain {
   display: none;
 }
+
+/* A short left-to-right flow of boxes for guides; it stacks vertically on narrow screens. */
+.flow {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.flow-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.flow-step span {
+  color: var(--vp-c-text-2);
+}
+
+.flow-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--vp-c-text-3);
+}
+
+@media (max-width: 640px) {
+  .flow {
+    flex-direction: column;
+  }
+
+  .flow-arrow {
+    justify-content: center;
+    transform: rotate(90deg);
+  }
+}
