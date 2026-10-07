@@ -68,8 +68,20 @@ Errors are JSON with the type `application/problem+json`:
 
 Let your program react to `status` or `code`, not to the message text. When asking for help, quote the `traceId`; administrators find the matching entry under **Settings → Server log**.
 
+## Try it on your installation
+
+To send real requests from the browser, use the API console that comes with your installation:
+
+1. Set `SWAGGER_ENABLED=true` in `.env` and run `docker compose up -d`.
+2. Open `https://tak.example.org/api/docs`.
+3. Either sign in to the Web app in the same browser first, so requests run as you, or choose **Authorize** and enter an API key, so they run as that API client.
+
+Every request changes real data on your installation. Turn the console off again with `SWAGGER_ENABLED=false` when you no longer need it.
+
+The reference on this site cannot do this: it runs on a different domain, and OpenMeshTak deliberately does not accept browser requests from other sites.
+
 ## Reference
 
-The [API reference](/api/reference) shows every operation of OpenMeshTak {{ $coreVersion }}. It only displays the API and sends no requests. You can also <a :href="$openapiUrl" download>download the OpenAPI document</a> for code generators.
+The [API reference](/api/reference) shows every operation of OpenMeshTak {{ $coreVersion }}. It only displays the API and sends no requests; to try requests, see [above](#try-it-on-your-installation). You can also <a :href="$openapiUrl" download>download the OpenAPI document</a> for code generators.
 
 For TypeScript and JavaScript, the [SDK](/sdk/) wraps these calls.
