@@ -33,7 +33,7 @@ The server certificate is what ATAK and iTAK check to know they talk to your ser
 | --- | --- |
 | **Let's Encrypt (automatic)** | Recommended. OpenMeshTak gets and renews a publicly trusted certificate itself. The DNS zone of the TAK host name must be at Cloudflare; you enter the zone ID and an API token limited to DNS editing for that zone. No web port needs to be open. |
 | **Upload certificate** | You already have a publicly trusted certificate, for example from certbot. Upload the full chain and the key. You must upload the renewed one before it expires. |
-| **OpenMeshTak CA** | Testing. Works without setup, but phones do not trust it on their own and the ATAK QR code is not offered. |
+| **OpenMeshTak CA** | Testing. Works without setup, but phones do not trust it on their own: there is no QR code for ATAK or iTAK, and participants set up their app with the connection package, which brings the trust along. |
 
 The certificates of participants' apps are separate. They always come from the OpenMeshTak certificate authority (CA) during enrollment, whatever you choose here.
 
