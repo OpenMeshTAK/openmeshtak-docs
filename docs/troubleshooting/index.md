@@ -25,7 +25,7 @@ Find the symptom, then follow the link to the page that explains the fix.
 
 | Symptom | Where to look |
 | --- | --- |
-| A setup or access link does not work | Links work once and expire. Create a new one: [Add members](/events/setup#_5-add-members) |
+| A setup or access link does not work | Links work once and expire. Create a new one: [Add members](/events/setup#_4-add-members) |
 | The dashboard says "No active event" | The person is not a member yet, or the event is still a draft: [Set up an event](/events/setup) |
 | A participant has no Meshtastic file | The event's Meshtastic configuration is not published yet: [Meshtastic](/events/meshtastic) |
 

@@ -7,7 +7,7 @@ Map content such as the game area, points of interest and offline maps reaches A
 1. Create a Data Package in the event.
 2. Draw or import the content. OpenMeshTak reads mission objects, CoT, KML/KMZ and existing ATAK Data Packages.
 3. Choose who receives it: everyone, or selected groups, roles or members.
-4. Choose whether the apps install it automatically on enrollment, on every connection, both, or not at all.
+4. Choose whether the apps install it automatically on enrollment, on every connection, both, or not at all. Without either, participants load it from the TAK server in their app or download it on the dashboard.
 5. Publish.
 
 Participants only ever receive published revisions. Your draft stays private until you publish again, and publishing without changes keeps the current revision.

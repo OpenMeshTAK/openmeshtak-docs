@@ -14,9 +14,14 @@ Links work only once. If one has expired, ask the organizers for a new one.
 
 ## The dashboard
 
-After signing in, the dashboard shows the participant's callsign, role and group for the active event, followed by three steps. If someone takes part in several events, they pick the event at the top.
+After signing in, the dashboard shows the participant's callsign, role and group for the active event, followed by the setup steps. If someone takes part in several events, they pick the event at the top.
 
-### 1. Meshtastic radio
+| Event | Steps |
+| --- | --- |
+| TAK only | TAK app, map data |
+| With Meshtastic | Meshtastic radio, TAK app, map data |
+
+### Meshtastic radio
 
 1. Flash the firmware version shown on the card. **Open flasher** opens the Meshtastic web flasher.
 2. Confirm that the radio runs at least the shown version.
@@ -25,13 +30,13 @@ After signing in, the dashboard shows the participant's callsign, role and group
 
 The file sets the radio's name, the event's channels and its radio settings. It contains channel keys: anyone with the file can read and send on the event's channels, so do not pass it on.
 
-### 2. TAK app
+### TAK app
 
-Connect ATAK or iTAK as described in [TAK apps](/participants/tak-apps). The dashboard shows the variant the organizers chose for this event.
+Connect ATAK or iTAK as described in [TAK apps](/participants/tak-apps).
 
-### 3. Map data
+### Map data
 
-With the OpenMeshTak TAK server, the TAK app receives the event's map data by itself. Otherwise, download each package from the dashboard and import the ZIP in the TAK app. Download it again when the organizers publish a new revision.
+The dashboard lists the participant's packages. Load them in the TAK app from the OpenMeshTak TAK server, or download them on the dashboard and import the ZIP in the TAK app. Packages marked on the dashboard reach a connected TAK app by themselves. A downloaded ZIP does not update: download it again when the organizers publish a new revision.
 
 ## Key holders
 

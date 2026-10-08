@@ -2,13 +2,16 @@
 
 OpenMeshTak creates one settings file per participant for their Meshtastic radio. It contains the radio's name, the event's radio settings and the channels that participant may use.
 
+This page applies to events with **Use Meshtastic radios** turned on; see [Set up an event](/events/setup#_1-create-the-event).
+
 ## Set up the radios
 
 1. Under the event's Meshtastic settings, choose the firmware. The recommended version is preselected.
 2. Adjust the radio settings and save.
 3. Create the primary channel and any secondary channels.
 4. Choose who receives each channel, see below.
-5. Publish the configuration.
+5. Under **TAK connection**, choose the channel the Meshtastic app sends TAK on. Without a choice, it uses the primary channel.
+6. Publish the configuration.
 
 Participants then download their file from the dashboard; see [Participant setup](/participants/).
 

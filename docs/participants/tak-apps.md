@@ -1,6 +1,6 @@
 # TAK apps
 
-Participants connect ATAK on Android or iTAK on iPhone. How depends on what the organizers chose for the event: the OpenMeshTak TAK server over the internet, or TAK over the Meshtastic radio.
+Participants connect ATAK on Android or iTAK on iPhone to the OpenMeshTak TAK server. In events with Meshtastic, they also connect it to the Meshtastic app, so TAK keeps working over the radio when there is no network.
 
 ## Tested versions
 
@@ -34,7 +34,7 @@ Good to know:
 
 ## Over Meshtastic
 
-Here the TAK app talks to the Meshtastic app on the same phone, which sends TAK over the radio. Import the Meshtastic settings file first, so the radio has the event's channels.
+Only in events with Meshtastic. Here the TAK app talks to the Meshtastic app on the same phone, which sends TAK over the radio. Import the Meshtastic settings file first, so the radio has the event's channels.
 
 **Android:**
 
@@ -48,4 +48,4 @@ Here the TAK app talks to the Meshtastic app on the same phone, which sends TAK 
 2. If the app offers a TAK mesh channel, choose the one shown on the dashboard.
 3. Download the TAK Data Package from the app and import it in iTAK or TAK Aware.
 
-Then import the event's map data from the dashboard by hand.
+Map data still comes from the OpenMeshTak TAK server whenever there is network. Without it, import the packages from the dashboard by hand.

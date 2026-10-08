@@ -9,11 +9,11 @@ A group usually is a team, for example `Bravo`. It defines:
 - the **callsign format**, built from `{username}` and optionally `{group}`, for example `{username} [{group}]`;
 - the **TAK team color** and the default TAK role;
 - optional **TAK group names** used on the TAK server; and
-- the **Meshtastic short-name prefix**, for example `B`, so the radios become `B1`, `B2` and so on.
+- the **Meshtastic short-name prefix**, for example `B`, so the radios become `B1`, `B2` and so on. TAK-only events do not need it.
 
 ## Roles
 
-A role describes what a member does, for example `Medic` or `Team Lead`. It can override the group's default TAK role, so a team lead shows up as `Team Lead` in ATAK while the rest of the team keeps the default.
+A role describes what a member does, for example `Participant` or `Squad Leader`. Radio channels can be given to a role, so only squad leaders receive the leaders' channel and its key. A role can also override the group's default TAK role, so a squad leader shows up as `Team Lead` in ATAK while the rest of the team keeps the default.
 
 ## Check the result
 
