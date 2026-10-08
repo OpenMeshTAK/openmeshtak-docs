@@ -12,6 +12,6 @@ export const versions = {
 
   // The SDK release these docs describe.
   sdk: "0.1.0",
-  sdkOpenapiSource: "0.1.9",
-  sdkApiRange: ">=0.1.9 <0.2.0",
+  sdkOpenapiSource: "0.2.0",
+  sdkApiRange: ">=0.2.0 <0.3.0",
 };
