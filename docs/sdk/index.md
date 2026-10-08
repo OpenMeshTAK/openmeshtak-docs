@@ -8,7 +8,7 @@
 pnpm add @openmeshtak/sdk
 ```
 
-The SDK needs Node.js 24 or newer. Version <code>{{ $versions.sdk }}</code> works with OpenMeshTak <code>{{ $versions.sdkApiRange }}</code>.
+The SDK needs Node.js 24 or newer. Its version always matches OpenMeshTak: use SDK {{ $coreVersion }} with OpenMeshTak {{ $coreVersion }}. It also works with the later patch releases of the same version line, so a Core update from 0.2.0 to 0.2.1 does not break it.
 
 ## Create a client
 
