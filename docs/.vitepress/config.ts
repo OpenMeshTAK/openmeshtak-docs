@@ -16,7 +16,8 @@ export default defineConfig({
       { text: "Run an event", link: "/events/" },
       { text: "Participants", link: "/participants/" },
       { text: "API", link: "/api/" },
-      { text: "Reference", link: "/api/reference" },
+      { text: "SDK", link: "/sdk/" },
+      { text: "API reference", link: "/api/reference" },
     ],
     // One sidebar in reading order, so the previous/next links lead through the whole guide.
     sidebar: [
@@ -76,7 +77,7 @@ export default defineConfig({
               { text: "SDK methods", link: "/sdk/methods" },
             ],
           },
-          { text: "Reference", link: "/api/reference" },
+          { text: "API reference", link: "/api/reference" },
         ],
       },
       {
