@@ -52,4 +52,4 @@ Start and end dates describe the schedule but do not change the state on their o
 
 ## Configuration revisions
 
-Activating an event publishes its configuration as revision 1. Later changes to channels or radio settings become a new revision when you publish them. Files that participants already downloaded keep the revision they were made from.
+Activating an event publishes its configuration as revision 1. Later changes to channels or radio settings become a new revision when you publish them. Files that participants already downloaded keep the revision they were made from. To publish, open the event's **Overview** tab and select **Publish configuration**: it lists the unpublished changes for you to confirm, and stays disabled while there are none.
