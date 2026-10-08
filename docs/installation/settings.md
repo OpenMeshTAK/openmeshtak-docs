@@ -32,6 +32,7 @@ The server certificate is what ATAK and iTAK check to know they talk to your ser
 | Source | Good for |
 | --- | --- |
 | **Let's Encrypt (automatic)** | Recommended. OpenMeshTak gets and renews a publicly trusted certificate itself, checked in one of two ways (below). |
+| **Reverse proxy files** | Your reverse proxy already has a certificate for the TAK host name, for example from certbot or Caddy. OpenMeshTak reads it and picks up renewals by itself. See below. |
 | **Upload certificate** | You already have a publicly trusted certificate, for example from certbot. Upload the full chain and the key. You must upload the renewed one before it expires. |
 | **OpenMeshTak CA** | Testing. Works without setup, but phones do not trust it on their own: there is no QR code for ATAK or iTAK, and participants set up their app with the connection package, which brings the trust along. |
 
@@ -41,6 +42,23 @@ Let's Encrypt has to check that the TAK host name is yours. Choose how:
 | --- | --- |
 | **HTTP-01 · Web address** | The TAK host name is the same as the Web address in `PUBLIC_HOST`, and port `80` reaches your reverse proxy. Nothing else to set up: Let's Encrypt asks through the proxy, and OpenMeshTak answers. |
 | **DNS-01 · Cloudflare** | The DNS zone of the TAK host name is at Cloudflare. Enter the zone ID and an API token limited to DNS editing for that zone. No web port needs to be open, and the TAK host name may differ from the Web address. |
+
+Before switching Let's Encrypt on, choose **Test setup**. It runs the whole check against Let's Encrypt's test service and installs nothing, so a mistake does not count against the limits of the real service.
+
+#### Reverse proxy files
+
+Mount the proxy's certificate directory read-only into OpenMeshTak. For certbot, uncomment this line in `docker-compose.yml` and restart with `docker compose up -d`:
+
+```yaml
+volumes:
+  - /etc/letsencrypt:/server/certs:ro
+```
+
+Then choose **Reverse proxy files** and enter both files relative to that directory, for certbot `live/tak.example.org/fullchain.pem` and `live/tak.example.org/privkey.pem`. OpenMeshTak reads only below `/server/certs` and checks the files every twelve hours, so a renewed certificate is used without any action.
+
+#### Expiry warnings
+
+When a public certificate is 14 and again 3 days from expiring, administrators with a verified email address get a warning. This happens when Let's Encrypt keeps failing, when the proxy stops renewing, or when an uploaded certificate was not replaced. It needs working [email](#general).
 
 The certificates of participants' apps are separate. They always come from the OpenMeshTak certificate authority (CA) during enrollment, whatever you choose here.
 
