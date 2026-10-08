@@ -1,3 +1,7 @@
+---
+description: "Let participants join an OpenMeshTak event from a Discord command, using the REST API instead of manual member lists."
+---
+
 # Use the API from Discord
 
 Many groups organize their events on Discord. This example shows how a Discord command could use the OpenMeshTak API, so that people join an event themselves instead of an organizer adding each one by hand. It is about the API calls, not about building a Discord bot; any bot framework works.

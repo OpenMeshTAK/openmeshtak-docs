@@ -1,3 +1,7 @@
+---
+description: "Edit maps, game areas and points of interest in the browser and deliver them to ATAK and iTAK as Data Packages."
+---
+
 # Map data
 
 Map content such as the game area, points of interest and offline maps reaches ATAK and iTAK as **Data Packages**. You edit a package in the Web app's map editor and publish it; the TAK apps then receive it from the built-in TAK server.

@@ -1,3 +1,7 @@
+---
+description: "Give every participant their own Meshtastic radio settings file with name, LoRa settings and channels, including secret channels."
+---
+
 # Meshtastic
 
 OpenMeshTak creates one settings file per participant for their Meshtastic radio. It contains the radio's name, the event's radio settings and the channels that participant may use.

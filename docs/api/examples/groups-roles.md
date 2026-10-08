@@ -1,3 +1,7 @@
+---
+description: "Create the groups and roles of an OpenMeshTak event through the REST API with curl or the TypeScript SDK."
+---
+
 # Create groups and roles
 
 Create a participant role:

@@ -1,3 +1,7 @@
+---
+description: "Every method of the OpenMeshTak TypeScript SDK client, grouped by task."
+---
+
 # SDK methods
 
 Every method of the SDK client, grouped by task. Each one sends a single request; the API client needs the same permission as the request in the [API reference](/api/reference). Updates take the `version` you last read, as explained in [Changing data safely](/api/#changing-data-safely).

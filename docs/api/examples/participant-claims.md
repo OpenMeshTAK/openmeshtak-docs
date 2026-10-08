@@ -1,3 +1,7 @@
+---
+description: "Create an access link that lets a participant claim their place in an OpenMeshTak event, through the REST API."
+---
+
 # Create an access link
 
 Requires `member-claims.create` for an active event.

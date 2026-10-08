@@ -1,3 +1,7 @@
+---
+description: "Create an OpenMeshTak event through the REST API with curl or the TypeScript SDK."
+---
+
 # Create an event
 
 Requires instance-wide `events.manage`.

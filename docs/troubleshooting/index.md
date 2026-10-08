@@ -1,3 +1,7 @@
+---
+description: "Find common OpenMeshTak installation, TAK and Meshtastic problems by symptom and jump to the fix."
+---
+
 # Troubleshooting
 
 Find the symptom, then follow the link to the page that explains the fix.

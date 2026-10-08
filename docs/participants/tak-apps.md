@@ -1,3 +1,7 @@
+---
+description: "Connect ATAK on Android and iTAK on iPhone to the OpenMeshTak TAK server by QR code, connection package or login."
+---
+
 # TAK apps
 
 Participants connect ATAK on Android or iTAK on iPhone to the OpenMeshTak TAK server. In events with Meshtastic, they also connect it to the Meshtastic app, so TAK keeps working over the radio when there is no network.

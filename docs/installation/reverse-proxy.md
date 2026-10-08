@@ -1,3 +1,7 @@
+---
+description: "Put OpenMeshTak behind a reverse proxy such as Caddy or nginx for HTTPS."
+---
+
 # Reverse proxy
 
 Browsers reach the Web app over HTTPS. OpenMeshTak itself does not handle that: a web server in front of it, the **reverse proxy**, holds the HTTPS certificate and passes requests on to OpenMeshTak.

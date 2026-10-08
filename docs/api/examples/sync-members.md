@@ -1,3 +1,7 @@
+---
+description: "Synchronize event members from an external system such as a sign-up portal into OpenMeshTak through the REST API."
+---
+
 # Synchronize external members
 
 Requires `members.sync` for the event.

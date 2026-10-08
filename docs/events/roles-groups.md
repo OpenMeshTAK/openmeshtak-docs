@@ -1,3 +1,7 @@
+---
+description: "Set up OpenMeshTak roles and groups so callsigns, TAK teams and radio names follow from each participant's place in the event."
+---
+
 # Roles and groups
 
 Roles and groups turn a member list into callsigns, TAK teams and radio names. What they mean is explained in [How an event works](/events/#roles-and-groups); this page shows how to set them up.

@@ -1,3 +1,7 @@
+---
+description: "What OpenMeshTak participants do: get in with an access link, then set up TAK apps and Meshtastic radios from the dashboard."
+---
+
 # Participant setup
 
 This page is for participants, and for organizers who explain the setup to them. Everything a participant needs is on their **dashboard** in the Web app.

@@ -1,3 +1,7 @@
+---
+description: "Create, edit and publish ATAK Data Packages for an OpenMeshTak event through the REST API."
+---
+
 # Work with Data Packages
 
 ## Create a package

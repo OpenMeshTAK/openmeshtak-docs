@@ -1,3 +1,7 @@
+---
+description: "The public TCP ports of the built-in OpenMeshTak TAK server, how to change them and how to check them."
+---
+
 # TAK ports
 
 The built-in TAK server needs three public TCP ports. This page explains which ports must stay on their standard numbers, what to do when another program already uses one, and how to check the result.

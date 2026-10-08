@@ -1,3 +1,7 @@
+---
+description: "Configure an OpenMeshTak installation in the Web app: sign-up, email delivery and TAK server certificates."
+---
+
 # Configure the installation
 
 After the first sign-in, a few installation-wide settings decide how people sign up, how email is sent and how TAK apps trust your server. All of them are under **Settings** in the Web app; nothing here belongs in `.env`.

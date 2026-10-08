@@ -1,3 +1,7 @@
+---
+description: "Download a participant's Meshtastic profile, TAK connection package and other setup files through the OpenMeshTak REST API."
+---
+
 # Download participant files
 
 Requires `member-artifacts.download` for on-behalf access. Every on-behalf view and download is audited.

@@ -1,3 +1,7 @@
+---
+description: "Install OpenMeshTak with Docker Compose: one container for the Web app, the REST API and the built-in TAK server."
+---
+
 # Install
 
 OpenMeshTak runs as one container. It serves the Web app, the API and the built-in TAK server. This page takes you from an empty server to the first administrator account.

@@ -1,3 +1,7 @@
+---
+description: "Back up an OpenMeshTak installation and upgrade it to a new release with Docker Compose."
+---
+
 # Backup and upgrade
 
 All data of an installation lives in two places: the `core-data` Docker volume (database, uploads, certificates) and the root key in `.env` (or the `root_encryption_key` file, if you keep it there). A backup needs both.

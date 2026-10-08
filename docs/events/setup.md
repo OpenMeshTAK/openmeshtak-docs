@@ -1,3 +1,7 @@
+---
+description: "Set up an OpenMeshTak event step by step, from creation to activation: members, roles, groups, TAK, Meshtastic and map data."
+---
+
 # Set up an event
 
 This page walks through one event from creation to activation. Each step happens in the Web app under **Events**.

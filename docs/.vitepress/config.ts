@@ -1,12 +1,42 @@
 import { defineConfig } from "vitepress";
 
+const siteUrl = "https://openmeshtak.github.io/openmeshtak-docs/";
+const socialImage = `${siteUrl}social-card.png`;
+
+// Same mapping as cleanUrls: "events/index.md" -> "events/", "events/setup.md" -> "events/setup".
+function pageUrl(relativePath: string): string {
+  return siteUrl + relativePath.replace(/(^|\/)index\.md$/, "$1").replace(/\.md$/, "");
+}
+
 export default defineConfig({
+  lang: "en-US",
   base: "/openmeshtak-docs/",
   title: "OpenMeshTak",
-  description: "Documentation for OpenMeshTak",
+  description:
+    "Open-source, self-hosted provisioning for TAK and Meshtastic: events, roles, TAK server, radio profiles and Data Packages through one API.",
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "/openmeshtak-docs/logo.svg" }],
+    ["meta", { property: "og:site_name", content: "OpenMeshTak" }],
+    ["meta", { property: "og:type", content: "website" }],
+    ["meta", { property: "og:image", content: socialImage }],
+    ["meta", { property: "og:image:width", content: "1280" }],
+    ["meta", { property: "og:image:height", content: "640" }],
+    ["meta", { name: "twitter:card", content: "summary_large_image" }],
+    ["meta", { name: "twitter:image", content: socialImage }],
   ],
+  // Per-page link-preview tags, so shared links show the page's own title and description.
+  transformHead({ pageData, title, description }) {
+    const url = pageUrl(pageData.relativePath);
+    return [
+      ["link", { rel: "canonical", href: url }],
+      ["meta", { property: "og:url", content: url }],
+      ["meta", { property: "og:title", content: title }],
+      ["meta", { property: "og:description", content: description }],
+      ["meta", { name: "twitter:title", content: title }],
+      ["meta", { name: "twitter:description", content: description }],
+    ];
+  },
+  sitemap: { hostname: siteUrl },
   cleanUrls: true,
   lastUpdated: true,
   themeConfig: {

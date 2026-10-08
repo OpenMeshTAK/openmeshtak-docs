@@ -1,3 +1,7 @@
+---
+description: "OpenMeshTak REST API basics: API clients and keys, the first request, errors, pagination and safe updates."
+---
+
 # API basics
 
 Everything the Web app does goes through the same REST API, so other programs can do it too: a Discord integration that adds members, a script that creates events, a portal that hands out radio files. This page covers what every API call has in common. The [examples](/api/examples/) show common tasks, and the [reference](/api/reference) lists every operation.

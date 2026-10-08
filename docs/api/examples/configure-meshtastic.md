@@ -1,3 +1,7 @@
+---
+description: "Configure Meshtastic firmware profiles, radio settings and channels for an OpenMeshTak event through the REST API."
+---
+
 # Configure Meshtastic
 
 List the installed firmware profiles:

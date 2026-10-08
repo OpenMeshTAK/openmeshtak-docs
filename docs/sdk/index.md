@@ -1,3 +1,7 @@
+---
+description: "Install and use @openmeshtak/sdk, the official TypeScript and JavaScript client for the OpenMeshTak REST API."
+---
+
 # SDK basics
 
 `@openmeshtak/sdk` is the official TypeScript and JavaScript client for the OpenMeshTak API. It sends the same requests as the `curl` examples, but with typed methods and results, so your editor completes field names and catches mistakes. Everything in [API basics](/api/) still applies: API clients, permissions, versions and errors work the same way.

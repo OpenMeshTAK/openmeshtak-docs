@@ -1,3 +1,7 @@
+---
+description: "How an OpenMeshTak event works: users and members, roles and groups, TAK callsigns and teams, Meshtastic channels and map data."
+---
+
 # How an event works
 
 Everything in OpenMeshTak belongs to an event, such as an exercise or a game weekend. You describe the event once: who takes part, in which role and team, which radio channels and which map data. OpenMeshTak then creates the setup for every participant's devices.

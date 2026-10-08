@@ -1,3 +1,7 @@
+---
+description: "Read a participant's resolved callsign, TAK team, role and radio settings through the OpenMeshTak REST API."
+---
+
 # Read a participant's profile
 
 Requires `members.read`, or `member-artifacts.download` for an audited on-behalf view. An active participant can also read their own profile.
