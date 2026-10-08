@@ -31,7 +31,9 @@ await client.createEventRole(eventId, {
 
 Create a Bravo group:
 
-```sh
+::: code-group
+
+```sh [curl]
 curl --fail-with-body --silent --show-error \
   -X POST \
   -H "Authorization: Bearer $OMTK_API_KEY" \
@@ -52,5 +54,20 @@ curl --fail-with-body --silent --show-error \
     }
   }'
 ```
+
+```ts [SDK]
+await client.createEventGroup(eventId, {
+  name: "Bravo",
+  slug: "bravo",
+  description: "Bravo team",
+  provisioning: {
+    callsignFormat: "{username} [Bravo]",
+    shortNamePrefix: "B",
+    tak: { serverGroups: [], role: "Team Member", team: "Purple" },
+  },
+});
+```
+
+:::
 
 Integrations use the slugs `participant` and `bravo` when synchronizing members.

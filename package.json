@@ -16,7 +16,8 @@
     "check": "pnpm licenses:check && pnpm core:check && pnpm docs:build && pnpm anchors:check",
     "anchors:check": "node scripts/check-anchors.mjs",
     "core:check": "node scripts/check-core.mjs",
-    "core:sync": "node scripts/sync-core.mjs"
+    "core:sync": "node scripts/sync-core.mjs",
+    "sdk:check": "node scripts/check-sdk-snippets.mjs"
   },
   "devDependencies": {
     "@scalar/api-reference": "^1.73.0",
