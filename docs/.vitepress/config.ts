@@ -68,6 +68,7 @@ export default defineConfig({
           { text: "Set up an event", link: "/events/setup" },
           { text: "Roles and groups", link: "/events/roles-groups" },
           { text: "Meshtastic", link: "/events/meshtastic" },
+          { text: "ATAK settings", link: "/events/atak-settings" },
           { text: "Map data", link: "/events/mission-data" },
         ],
       },
