@@ -30,6 +30,8 @@ The username and password are the participant's OpenMeshTak login. Participants 
 
 The dashboard confirms when the app has received its certificate. From then on the app exchanges positions with everyone in the same event, and receives the event's map data.
 
+The app also takes over the participant's callsign, team color and role from the event. ATAK gets them when it connects for the first time and again whenever the operator changes them; iTAK and WinTAK get them in the downloaded package. A callsign changed by hand in the app stays until the event's values change.
+
 Good to know:
 
 - The QR code appears only when the TAK server has a publicly trusted certificate. Otherwise, use the connection package.
