@@ -22,3 +22,21 @@ Participants only ever receive published revisions. Your draft stays private unt
 - Every participant can also download their packages from the dashboard and import the ZIP by hand, for example when TAK runs over Meshtastic.
 
 A downloaded file does not update itself. After a new revision, participants who import by hand need to download it again.
+
+## Choosing a base map
+
+Under **Settings → General → Base maps**, administrators can configure up to ten online maps and choose a default. **Street** adds an OpenStreetMap template, **Satellite** adds [Esri World Imagery](https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9), and **Custom map** accepts another HTTPS XYZ tile URL. Each map has its own name, required source attribution and maximum zoom. Save the list, then reload open map views.
+
+When several maps are configured, use the **Base map** menu (map icon) in the editor or live-map toolbar to switch. The current position, zoom and mission layers stay in place; only the chosen online provider loads tiles. Your browser remembers the selected map after a reload and in other editor/live views. If that map is removed, the configured default is used. Zoom with the mouse wheel or a pinch gesture; the separate +/− buttons are hidden. Provider terms apply, and online basemaps are not exported as offline tiles.
+
+## Finding WinTAK icon sets
+
+On Windows, WinTAK stores installed icon sets in `%APPDATA%\WinTAK\Databases\iconsets.sqlite`. Paste `%APPDATA%\WinTAK\Databases` into File Explorer to find the database. Application assets are also under `C:\Program Files\WinTAK\Assets`.
+
+Open **Settings → General → Icon sets**, beside the base-map settings, to upload `iconsets.sqlite`. Close WinTAK before copying the database. Upload, replacement and removal require permission to manage settings. Core accepts databases up to 10 MB and reports entries it cannot import. The shared images are available in every editor; existing package-specific libraries take precedence for matching icon paths.
+
+In the editor, open **Icons** to search by set, group or filename. Select a marker on an editable, unlocked layer and use **Icon set** to choose its image. Replacing or removing the shared database keeps stored marker paths; missing paths use fallback symbols. Reload other open editor tabs after changing the database.
+
+These images are used in the editor. TAK exports retain the marker's original icon path; install the matching set separately in TAK. Individual asset folders and icon-set ZIP imports are not supported yet. This editor update is implemented locally and still awaits verification before release.
+
+OpenMeshTak does not include WinTAK's icon images. Operators supply their own icon-set files and are responsible for the right to use and share those images.
