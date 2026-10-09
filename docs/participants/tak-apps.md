@@ -1,10 +1,10 @@
 ---
-description: "Connect ATAK on Android and iTAK on iPhone to the OpenMeshTak TAK server by QR code, connection package or login."
+description: "Connect ATAK on Android, iTAK on iPhone and WinTAK on Windows to the OpenMeshTak TAK server by QR code, connection package or login."
 ---
 
 # TAK apps
 
-Participants connect ATAK on Android or iTAK on iPhone to the OpenMeshTak TAK server. In events with Meshtastic, they also connect it to the Meshtastic app, so TAK keeps working over the radio when there is no network.
+Participants connect ATAK on Android, iTAK on iPhone or WinTAK on Windows to the OpenMeshTak TAK server. In events with Meshtastic, they also connect it to the Meshtastic app, so TAK keeps working over the radio when there is no network.
 
 ## Tested versions
 
@@ -12,12 +12,13 @@ Participants connect ATAK on Android or iTAK on iPhone to the OpenMeshTak TAK se
 | --- | --- | --- |
 | ATAK-CIV | <code>{{ $versions.atak }}</code> | Android {{ $versions.android }} |
 | iTAK | <code>{{ $versions.itak }}</code> | iOS {{ $versions.ios }} |
+| WinTAK | <code>{{ $versions.wintak }}</code> | Windows {{ $versions.windows }} |
 
 Other versions may work but have not been tested.
 
 ## With the OpenMeshTak TAK server
 
-On the dashboard, choose **Android · ATAK** or **iPhone · iTAK**, then one of three ways:
+On the dashboard, choose **Android · ATAK** or **iPhone · iTAK**, then one of three ways. WinTAK has its own way, see [WinTAK](#wintak).
 
 | Way | What to do |
 | --- | --- |
@@ -33,8 +34,17 @@ Good to know:
 
 - The QR code appears only when the TAK server has a publicly trusted certificate. Otherwise, use the connection package.
 - The QR code and the iTAK package sign in as the participant. Do not share them.
-- An iTAK package belongs to one iPhone. To set up another device, revoke the old certificate on the dashboard first.
+- Each iTAK or WinTAK download is a new login for one device. Import it within the time the dashboard shows (24 hours unless the operator changed it), otherwise it stops working. After the first connection the dashboard names the device, for example *iPhone 17 · iTAK 2.12.3 · Peter*.
 - iTAK needs the TAK server's Data Package port on `8443`. Operators find the details in [TAK ports](/installation/tak-ports#different-data-package-port).
+
+## WinTAK
+
+WinTAK cannot sign in with a username and password, so it only gets a connection package with its own certificate:
+
+1. On the dashboard, choose **Windows · WinTAK** and download the WinTAK package.
+2. In WinTAK, open the main menu, then **Import Manager → Import Files**, and choose the downloaded file.
+
+The package signs in as the participant. Do not share it. For another computer, download another package.
 
 ## Over Meshtastic
 

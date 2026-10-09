@@ -9,6 +9,8 @@ export const versions = {
   android: "16",
   itak: "2.12.3",
   ios: "26",
+  wintak: "4.6.1",
+  windows: "11",
   firmware: "2.8.1",
 
 };

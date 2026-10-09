@@ -69,3 +69,5 @@ The certificates of participants' apps are separate. They always come from the O
 ### Enrolled apps
 
 The TAK server page lists every app that received a certificate. Revoking one disconnects that app at once. Revoke apps of lost phones and of people who leave.
+
+An app is named after the device it reports once it connects, for example *iPhone 17 · iTAK 2.12.3 · Peter*. iTAK and WinTAK packages contain a ready-made login, so one that no app connects with within **Unused package expiry** (24 hours by default) is revoked by itself.
