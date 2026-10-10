@@ -1,9 +1,9 @@
 {
-  "coreVersion": "0.2.2",
+  "coreVersion": "0.3.0",
   "sourceRepository": "https://github.com/OpenMeshTAK/openmeshtak",
-  "sourceRef": "main@9991c1d",
-  "release": false,
-  "openapiFile": "openapi-0.2.2.json",
-  "sha256": "503eff21c1e45e320bc4739a8f9959c9a961c2807078ca140012556b4eba6fb1",
+  "sourceRef": "v0.3.0",
+  "release": true,
+  "openapiFile": "openapi-0.3.0.json",
+  "sha256": "c3d28591e8b5742a2b8ca1d4ac607213dcbb5b76983cc78a41921b9bba5d0c28",
   "composeSha256": "cb10f015ec40fb7f0b06f81e54cfd9ceae0ac1136ac7d38b195c6364d70c6771"
 }
