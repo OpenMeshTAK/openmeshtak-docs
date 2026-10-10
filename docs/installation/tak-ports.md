@@ -41,7 +41,7 @@ If Core cannot open one of its ports, it does not start at all. A TAK server nev
 
 ## When a port is already taken
 
-Work through these options in order and stop at the first one that fits.
+Work through these options in order and stop at the first one that fits. Two more options for special cases are under [Advanced options](#advanced-options).
 
 ### 1. Publish the standard ports directly {#standard-ports-direct}
 
@@ -84,50 +84,6 @@ A plain `"8443:8443"` also binds `127.0.0.1` and collides with the program there
 
 Check with `sudo ss -tlnp | grep 8443` that the other program listens only on `127.0.0.1` or `[::1]`. Repeat the check after updating that program: an update may restore its public listener, and Core then no longer starts.
 
-### 4. Share 8443 with SNI passthrough {#sni-passthrough}
-
-On a single public address, a layer-4 router such as HAProxy (TCP mode) or nginx `stream` with `ssl_preread` can own public `8443`. It reads only the host name from the start of each TLS connection and forwards the connection unchanged: `tak.example.org` goes to Core, the other name goes to the other program.
-
-This works only when:
-
-- the other program can move to a private port, because only the router may listen on public `8443`;
-- the router does **not** terminate TLS. Core checks each device's client certificate itself, so no `ssl` option may appear on the router's listener or backend lines; and
-- connections without a known host name go to Core, never to an administration panel.
-
-Test enrollment, Data Package download and CoT with your participants' app versions before you rely on this setup.
-
-### 5. Use a different Data Package port {#different-data-package-port}
-
-When nothing else works and **all participants use ATAK**, publish Marti on another port, for example `8484`:
-
-```yaml
-ports:
-  - "8446:8446"
-  - "8484:8443"
-  - "8089:8089"
-```
-
-Then enter `8484` as **Data Package port** on the **TAK server** page and confirm the change.
-
-What happens for an ATAK participant:
-
-1. They enter only the host, username and password in Quick Connect.
-2. ATAK enrolls on `8446` and downloads an enrollment profile on the same port.
-3. The profile sets ATAK's Data Package port (`apiSecureServerPort`) to `8484`.
-4. ATAK connects CoT on `8089` and loads Data Packages from `https://tak.example.org:8484/Marti`.
-
-This is a setting delivered by the profile, not a redirect from `8443`. ATAK never contacts the program on `8443`. If the profile cannot be downloaded or imported, the enrollment has failed and must be repeated.
-
-Tested with ATAK-CIV <code>{{ $versions.atak }}</code> on Android {{ $versions.android }}.
-
-::: warning iTAK requires public Marti port 8443
-iTAK <code>{{ $versions.itak }}</code> ignores the delivered port and always requests Data Packages on `8443`. With a different Data Package port, iTAK still connects and exchanges CoT on `8089`, but cannot list or download server Data Packages. If participants use iTAK, use one of the options above instead.
-:::
-
-::: warning One Data Package port per ATAK device
-ATAK stores the Data Package port once for the whole app, not per server. A device connected to several TAK servers that use different Data Package ports may stop reaching one of them.
-:::
-
 Do not move `8446` or `8089` unless there is no other way. The Web app warns you, because participants then have to enter the ports by hand and Quick Connect no longer works as described.
 
 ## Changing ports later
@@ -161,13 +117,53 @@ The certificate must belong to the TAK host, not to another program such as a ho
 | `docker compose up` reports a port as already allocated | Another program owns one of the ports | [Find the program](#find-a-port-conflict) and pick an option above. |
 | Quick Connect fails immediately | `8446` is blocked or owned by another program | Check the firewall and `ss -tlnp`; keep `8446` on the TAK host. |
 | ATAK enrolls, but Data Packages fail and the server log shows no `/Marti` requests | ATAK still uses `8443` from an old setup or a failed profile import | Remove the server in ATAK and set it up again. Confirm the **TAK server** page shows the published port. |
-| iTAK shows an error for server Data Packages | Marti is not on public `8443` | Use a second address, move the other program, or SNI passthrough. |
+| iTAK shows an error for server Data Packages | Marti is not on public `8443` | Use a second address, move the other program, or [SNI passthrough](#sni-passthrough). |
 | The `openssl` check shows a panel certificate on `8443` | The other program still answers on public `8443` | Bind Core to the public address and the other program to loopback. |
 
 To roll back, restore the previous `docker-compose.yml` mapping and **TAK server** values, restart with `docker compose up -d`, and set up the affected devices again.
 
-## Background
+## Advanced options
 
-The ATAK behavior above follows the official ATAK source: [`SslNetCotPort`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/comms/SslNetCotPort.java) (default ports), [`CertificateEnrollmentClient`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/net/CertificateEnrollmentClient.java) and [`DeviceProfileOperation`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/net/DeviceProfileOperation.java) (enrollment and profile download), and [`CotMapComponent`](https://github.com/TAK-Product-Center/atak-civ/blob/main/atak/ATAK/app/src/main/java/com/atakmap/android/cot/CotMapComponent.java) (`apiSecureServerPort`). SNI passthrough is described in the [NGINX `ssl_preread`](https://nginx.org/en/docs/stream/ngx_stream_ssl_preread_module.html) and [HAProxy SNI](https://www.haproxy.com/blog/enhanced-ssl-load-balancing-with-server-name-indication-sni-tls-extension/) documentation.
+Only if none of the three options above fits. Both need more care and limit which apps work.
 
-Source code alone is not a compatibility result. All tested app versions are listed in [TAK apps](/participants/tak-apps#tested-versions).
+### Share 8443 with SNI passthrough {#sni-passthrough}
+
+On a single public address, a layer-4 router such as HAProxy (TCP mode) or nginx `stream` with `ssl_preread` can own public `8443`. It reads only the host name from the start of each TLS connection and forwards the connection unchanged: `tak.example.org` goes to Core, the other name goes to the other program.
+
+This works only when:
+
+- the other program can move to a private port, because only the router may listen on public `8443`;
+- the router does **not** terminate TLS. Core checks each device's client certificate itself, so no `ssl` option may appear on the router's listener or backend lines; and
+- connections without a known host name go to Core, never to an administration panel.
+
+Test enrollment, Data Package download and CoT with your participants' app versions before you rely on this setup.
+
+### Use a different Data Package port {#different-data-package-port}
+
+When nothing else works and **all participants use ATAK**, publish Marti on another port, for example `8484`:
+
+```yaml
+ports:
+  - "8446:8446"
+  - "8484:8443"
+  - "8089:8089"
+```
+
+Then enter `8484` as **Data Package port** on the **TAK server** page and confirm the change.
+
+What happens for an ATAK participant:
+
+1. They enter only the host, username and password in Quick Connect.
+2. ATAK enrolls on `8446` and downloads an enrollment profile on the same port.
+3. The profile sets ATAK's Data Package port (`apiSecureServerPort`) to `8484`.
+4. ATAK connects CoT on `8089` and loads Data Packages from `https://tak.example.org:8484/Marti`.
+
+This is a setting delivered by the profile, not a redirect from `8443`. ATAK never contacts the program on `8443`. If the profile cannot be downloaded or imported, the enrollment has failed and must be repeated.
+
+::: warning iTAK requires public Marti port 8443
+iTAK <code>{{ $versions.itak }}</code> ignores the delivered port and always requests Data Packages on `8443`. With a different Data Package port, iTAK still connects and exchanges CoT on `8089`, but cannot list or download server Data Packages. If participants use iTAK, use one of the options above instead.
+:::
+
+::: warning One Data Package port per ATAK device
+ATAK stores the Data Package port once for the whole app, not per server. A device connected to several TAK servers that use different Data Package ports may stop reaching one of them.
+:::

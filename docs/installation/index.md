@@ -8,7 +8,7 @@ OpenMeshTak runs as one container. It serves the Web app, the API and the built-
 
 ## What you need
 
-- a Linux server with Docker Engine and Docker Compose;
+- a Linux server with Docker Engine and Docker Compose; 2 CPU cores and 2 GB RAM are enough for a few hundred participants, see [Server size and bandwidth](/installation/server-size);
 - a public DNS name for it, for example `tak.example.org`;
 - a reverse proxy that serves HTTPS for that name, see [Reverse proxy](/installation/reverse-proxy); and
 - the public TAK ports `8446`, `8443` and `8089`, see [TAK ports](/installation/tak-ports).

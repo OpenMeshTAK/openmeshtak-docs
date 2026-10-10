@@ -14,8 +14,6 @@ Participants connect ATAK on Android, iTAK on iPhone or WinTAK on Windows to the
 | iTAK | <code>{{ $versions.itak }}</code> | iOS {{ $versions.ios }} |
 | WinTAK | <code>{{ $versions.wintak }}</code> | Windows {{ $versions.windows }} |
 
-Other versions may work but have not been tested.
-
 ## With the OpenMeshTak TAK server
 
 On the dashboard, choose **Android · ATAK** or **iPhone · iTAK**, then one of three ways. WinTAK has its own way, see [WinTAK](#wintak).

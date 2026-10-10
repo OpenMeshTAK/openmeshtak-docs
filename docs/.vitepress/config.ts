@@ -45,9 +45,16 @@ export default defineConfig({
       { text: "Install", link: "/installation/" },
       { text: "Run an event", link: "/events/" },
       { text: "Participants", link: "/participants/" },
-      { text: "API", link: "/api/" },
-      { text: "SDK", link: "/sdk/" },
-      { text: "API reference", link: "/api/reference" },
+      { text: "Help", link: "/troubleshooting/" },
+      {
+        text: "For developers",
+        items: [
+          { text: "API basics", link: "/api/" },
+          { text: "API examples", link: "/api/examples/" },
+          { text: "SDK", link: "/sdk/" },
+          { text: "API reference", link: "/api/reference" },
+        ],
+      },
     ],
     // One sidebar in reading order, so the previous/next links lead through the whole guide.
     sidebar: [
@@ -55,9 +62,13 @@ export default defineConfig({
         text: "Install",
         items: [
           { text: "Install with Docker", link: "/installation/" },
+          { text: "Server size and bandwidth", link: "/installation/server-size" },
           { text: "Reverse proxy and TLS", link: "/installation/reverse-proxy" },
           { text: "TAK ports", link: "/installation/tak-ports" },
           { text: "Configure the installation", link: "/installation/settings" },
+          { text: "Users and permissions", link: "/installation/users" },
+          { text: "Data and privacy", link: "/installation/privacy" },
+          { text: "System status and logs", link: "/installation/monitoring" },
           { text: "Backup and upgrade", link: "/installation/backup-upgrade" },
         ],
       },
@@ -70,6 +81,9 @@ export default defineConfig({
           { text: "Meshtastic", link: "/events/meshtastic" },
           { text: "ATAK settings", link: "/events/atak-settings" },
           { text: "Map data", link: "/events/mission-data" },
+          { text: "Live view and history", link: "/events/live-history" },
+          { text: "Offline HQ", link: "/events/offline-hq" },
+          { text: "Event day checklist", link: "/events/event-day" },
         ],
       },
       {
@@ -80,7 +94,11 @@ export default defineConfig({
         ],
       },
       {
-        text: "API",
+        text: "Help",
+        items: [{ text: "Troubleshooting", link: "/troubleshooting/" }],
+      },
+      {
+        text: "For developers",
         items: [
           { text: "API basics", link: "/api/" },
           {
@@ -110,10 +128,6 @@ export default defineConfig({
           },
           { text: "API reference", link: "/api/reference" },
         ],
-      },
-      {
-        text: "Help",
-        items: [{ text: "Troubleshooting", link: "/troubleshooting/" }],
       },
     ],
     search: { provider: "local" },

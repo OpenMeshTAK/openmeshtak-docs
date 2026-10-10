@@ -15,7 +15,8 @@ After the first sign-in, a few installation-wide settings decide how people sign
 | **Installation** | The name people see in the browser tab, on the sign-in page and in emails. |
 | **Registration** | **Closed**: only administrators create accounts, participants arrive through links. **Invite only**: people sign up with a single-use invite link you create. **Open**: anyone who reaches the site can sign up. |
 | **Email** | SMTP server, sender address and sender name for password resets, address confirmations and security notices. Send a test email after saving. |
-| **Base map** | The online map shown in the map editor and live view: an HTTPS tile URL with `{z}`, `{x}` and `{y}`, plus the attribution the provider requires. |
+| **Base maps** | Up to ten online maps for the map editor, live view and history, one of them the default. **Street** adds OpenStreetMap, **Satellite** adds Esri World Imagery, **Custom map** takes another HTTPS tile URL with `{z}`, `{x}` and `{y}`. Each needs the attribution its provider requires; the provider's terms apply. |
+| **Icon sets** | A TAK icon-set database (`iconsets.sqlite`, up to 10 MB) whose icons the map editor offers; see [Map data](/events/mission-data#icon-sets). |
 
 New accounts have no permissions until you add them to a user group or an event, even with open registration.
 

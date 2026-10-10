@@ -26,6 +26,9 @@ For a quick check, open **Settings → System status**. It shows whether the dat
 | ATAK connects, but no Data Packages | [TAK ports](/installation/tak-ports#troubleshooting) |
 | iTAK cannot list Data Packages | [TAK ports](/installation/tak-ports#different-data-package-port) |
 | Apps stopped connecting after a settings change | Devices keep the old address and ports: [Changing ports later](/installation/tak-ports#changing-ports-later) |
+| Apps keep disconnecting and reconnecting | "TAK client too slow" in the log: [Warnings](/installation/monitoring#warnings), [Server size and bandwidth](/installation/server-size) |
+| History shows no tracks | The event did not record: [Recording](/events/live-history#recording) |
+| Offline HQ cannot connect the radio | Use Chrome or Edge on Windows or Linux: [Offline HQ](/events/offline-hq#what-you-need) |
 
 ## Participants
 

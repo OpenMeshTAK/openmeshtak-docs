@@ -40,6 +40,10 @@ features:
     details: Edit map content, publish it as Data Packages and deliver updates to the TAK apps automatically.
     link: /events/mission-data
     linkText: Data Packages
+  - title: Live view and history
+    details: Follow every TAK app on the event map in the browser, grouped by platoon, and replay recorded tracks afterwards.
+    link: /events/live-history
+    linkText: Live view and history
   - title: Automation
     details: Everything in the Web app is available through a versioned REST API, for example to add members from a Discord bot.
     link: /api/examples/
