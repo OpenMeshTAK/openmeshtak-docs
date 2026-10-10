@@ -6,6 +6,8 @@ description: "Find common OpenMeshTak installation, TAK and Meshtastic problems 
 
 Find the symptom, then follow the link to the page that explains the fix.
 
+For a quick check, open **Settings → System status**. It shows whether the database answers, how much space is left on the data disk, whether the TAK server is listening, when its certificate expires and whether errors were logged in the last 24 hours. The page needs the permission to read the server log.
+
 ## Installation
 
 | Symptom | Where to look |
