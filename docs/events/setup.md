@@ -42,8 +42,12 @@ A member added through an external identity has no password. To let them sign in
 
 Send setup and access links privately. Anyone with the link can use it.
 
+![Members tab of an event with callsigns, short names, roles and groups](/screenshots/event-members.webp)
+
 ## 5. Activate
 
 Check the members' profiles for callsign or name conflicts, then activate the event. Participants now see their setup on the dashboard; see [Participant setup](/participants/). The members list shows who has connected a TAK app.
+
+![Overview of an active event with member counts, schedule and lifecycle actions](/screenshots/event-overview.webp)
 
 When the event is over, archive it. It becomes read-only, and event accounts are removed unless you made them permanent.

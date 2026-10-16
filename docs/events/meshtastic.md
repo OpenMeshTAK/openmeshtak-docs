@@ -17,6 +17,8 @@ This page applies to events with **Use Meshtastic radios** turned on; see [Set u
 5. Under **TAK connection**, choose the channel the Meshtastic app sends TAK on. Without a choice, it uses the primary channel.
 6. Publish the configuration.
 
+![Meshtastic tab showing the event firmware line and the published firmware releases](/screenshots/event-meshtastic.webp)
+
 Participants then download their file from the dashboard; see [Participant setup](/participants/).
 
 Only settings the chosen firmware supports are written to the file. Firmware versions tested on a real radio are marked **Tested on a device**; currently that is firmware <code>{{ $versions.firmware }}</code> with the Meshtastic Android app.

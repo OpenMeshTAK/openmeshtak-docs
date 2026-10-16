@@ -15,6 +15,8 @@ A group usually is a team, for example `Bravo`. It defines:
 - optional **TAK server group names**, passed on for an external TAK server; the built-in TAK server ignores them; and
 - the **Meshtastic short-name prefix**, for example `B`, so the radios become `B1`, `B2` and so on. TAK-only events do not need it.
 
+![Groups tab with callsign format, TAK team and role, and Meshtastic short names per group](/screenshots/event-groups.webp)
+
 ## Roles
 
 A role describes what a member does, for example `Participant` or `Squad Leader`. Radio channels can be given to a role, so only squad leaders receive the leaders' channel and its key. A role can also override the group's default TAK role, so a squad leader shows up as `Team Lead` in ATAK while the rest of the team keeps the default. A role marked **Sees all TAK groups**, for example platoon leaders, sees and reaches everyone whatever the [TAK group mode](#tak-group-mode).
@@ -32,6 +34,8 @@ By default every TAK app sees everyone in the event. In the event's **TAK** tab,
 Direct messages and items sent to one person always arrive, also across groups. The mode applies within seconds, without publishing. Teams that must not know about each other at all, such as red and blue, belong in separate events.
 
 Separating groups also saves bandwidth in large events; see [Server size and bandwidth](/installation/server-size#large-events).
+
+![TAK tab with the TAK groups setting "Who sees whom" and the ATAK settings menu](/screenshots/event-tak.webp)
 
 ## Check the result
 

@@ -14,6 +14,8 @@ Map content such as the game area, points of interest and offline maps reaches A
 4. Choose whether the apps install it automatically on enrollment, on every connection, both, or not at all. Without either, participants load it from the TAK server in their app or download it on the dashboard.
 5. Publish.
 
+![Map editor with a Data Package layer: exercise boundary, routes, rally point and HQ marker](/screenshots/event-data-packages.webp)
+
 Participants only ever receive published revisions. Your draft stays private until you publish again, and publishing without changes keeps the current revision.
 
 ## How participants get it
