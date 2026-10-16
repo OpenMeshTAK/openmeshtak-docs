@@ -8,6 +8,8 @@ This page is for participants, and for organizers who explain the setup to them.
 
 ## Getting in
 
+![Account setup page where a participant chooses a password after opening the setup link](/screenshots/participant-account-setup.webp){.screenshot-right}
+
 Participants receive one of these from the organizers:
 
 - a **setup link**: open it once and choose a password;
@@ -15,8 +17,6 @@ Participants receive one of these from the organizers:
 - an invitation to register.
 
 Links work only once. If one has expired, ask the organizers for a new one.
-
-![Account setup page where a participant chooses a password after opening the setup link](/screenshots/participant-account-setup.webp)
 
 ## The dashboard
 
@@ -27,7 +27,7 @@ After signing in, the dashboard shows the participant's callsign, role and group
 | TAK only | TAK app, map data |
 | With Meshtastic | Meshtastic radio, TAK app, map data |
 
-![Participant dashboard with event identity, Meshtastic radio steps and the TAK server card](/screenshots/participant-home.webp)
+![Participant dashboard with event identity, Meshtastic radio steps and the TAK server card](/screenshots/participant-home.webp){.screenshot-right}
 
 ### Meshtastic radio
 

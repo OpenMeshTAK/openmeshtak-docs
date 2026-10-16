@@ -8,14 +8,14 @@ Roles and groups turn a member list into callsigns, TAK teams and radio names. W
 
 ## Groups
 
+![Groups tab with callsign format, TAK team and role, and Meshtastic short names per group](/screenshots/event-groups.webp){.screenshot-right}
+
 A group usually is a team, for example `Bravo`. It defines:
 
 - the **callsign format**, built from `{username}` and optionally `{group}`, for example `{username} [{group}]`;
 - the **TAK team color** and the default TAK role;
 - optional **TAK server group names**, passed on for an external TAK server; the built-in TAK server ignores them; and
 - the **Meshtastic short-name prefix**, for example `B`, so the radios become `B1`, `B2` and so on. TAK-only events do not need it.
-
-![Groups tab with callsign format, TAK team and role, and Meshtastic short names per group](/screenshots/event-groups.webp)
 
 ## Roles
 
