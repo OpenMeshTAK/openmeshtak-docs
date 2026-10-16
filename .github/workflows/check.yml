@@ -18,3 +18,5 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm check
+      # The ts examples must compile against the pinned @openmeshtak/sdk devDependency.
+      - run: pnpm sdk:check

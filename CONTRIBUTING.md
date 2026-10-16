@@ -11,7 +11,7 @@ Pages live below `docs/`. Navigation lives in `docs/.vitepress/config.ts`. The g
 
 Every fact has one home. Link to that page instead of repeating ports, tested versions, error codes or secret-handling rules.
 
-SDK examples are type-checked against an SDK checkout next to this repository (built with `pnpm build` there): run `pnpm sdk:check`. `release.ps1` runs it automatically before publishing the docs. It is not part of `pnpm check` until the SDK is on npm.
+Every ```` ```ts ```` block is an SDK example. `pnpm sdk:check` type-checks each one with `tsc` against the `@openmeshtak/sdk` version pinned in `package.json`; CI runs it after `pnpm check`. Variables an example takes for granted (`client`, `eventId`, `memberId`, `discordUserId`) are declared by the check unless the block defines them. To check an example that uses an unreleased SDK method, build an SDK checkout and run `pnpm sdk:check ../openmeshtak-sdk`. The release bumps the pinned SDK to the released version.
 
 Never type a version number into a page. The Core version comes from the manifest as `{{ $coreVersion }}`; the SDK has the same version as Core; tested app and firmware versions live in `docs/.vitepress/versions.ts` and appear as `{{ $versions.atak }}` and so on. After a new real-device test, change the value there once.
 
