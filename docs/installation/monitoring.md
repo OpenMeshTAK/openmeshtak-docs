@@ -8,6 +8,8 @@ Two pages under **Settings** show how the installation is doing. Both need the p
 
 ## System status
 
+<Screenshot name="settings-system-status" alt="System status page with health checks" side />
+
 **Settings → System status** refreshes every 30 seconds and shows:
 
 - **Checks**: database, free disk space, TAK server, its certificate and errors in the last 24 hours, each with a green, orange or red mark;

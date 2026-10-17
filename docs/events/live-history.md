@@ -8,6 +8,8 @@ During an event, the operations room follows every TAK app on a map in the brows
 
 ## Live view
 
+<Screenshot name="event-live" alt="Live view with players of Alpha, Bravo and Command on the field map" side />
+
 The live map shows the event's map data, the current position of every connected app and the markers participants placed. Positions refresh by themselves; an arrow shows where someone is heading.
 
 The panel on the right lists the connected apps:
@@ -29,6 +31,8 @@ The history only has data if the event records it. Recording is **off** by defau
 Only positions and markers are recorded, at most one position per app every five seconds.
 
 ## History
+
+<Screenshot name="event-history" alt="History view with player tracks, timeline and analysis" side />
 
 **History** replays the recorded positions on the event map.
 

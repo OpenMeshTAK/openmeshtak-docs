@@ -8,6 +8,8 @@ OpenMeshTak can set up the participants' ATAK apps: coordinate format, units, ho
 
 ## Settings for the whole event
 
+<Screenshot name="atak-settings" alt="ATAK settings topic page Display and units" side />
+
 1. Open the event's **TAK** tab. The menu lists the ATAK settings by topic, such as **Display and units** or **Position reporting**.
 2. Choose values. **Not set** sends nothing, so each device keeps its own value. The **(?)** next to a setting explains it and shows ATAK's default and the key.
 3. Rarely needed settings appear under **Advanced** at the end of a topic once you switch them on.

@@ -67,13 +67,18 @@
   }
 }
 
-.vp-doc img[src*="/screenshots/"] {
+.vp-doc img.screenshot {
   display: block;
   width: 100%;
   max-width: 480px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   cursor: zoom-in;
+}
+
+html.dark .vp-doc img.screenshot-light,
+html:not(.dark) .vp-doc img.screenshot-dark {
+  display: none;
 }
 
 /* Next to the section text on wide screens; below it on narrow ones. */

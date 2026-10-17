@@ -8,7 +8,7 @@ This page is for participants, and for organizers who explain the setup to them.
 
 ## Getting in
 
-![Account setup page where a participant chooses a password after opening the setup link](/screenshots/participant-account-setup.webp){.screenshot-right}
+<Screenshot name="participant-account-setup" alt="Account setup page where a new player chooses a password" side />
 
 Participants receive one of these from the organizers:
 
@@ -27,7 +27,7 @@ After signing in, the dashboard shows the participant's callsign, role and group
 | TAK only | TAK app, map data |
 | With Meshtastic | Meshtastic radio, TAK app, map data |
 
-![Participant dashboard with event identity, Meshtastic radio steps and the TAK server card](/screenshots/participant-home.webp){.screenshot-right}
+<Screenshot name="participant-home" alt="Participant dashboard of VIPER with radio steps, secret channel handout and TAK apps" side />
 
 ### Meshtastic radio
 

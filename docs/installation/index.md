@@ -65,6 +65,8 @@ curl --fail https://tak.example.org/api/v1/health
 
 ## 4. Create the first administrator
 
+<Screenshot name="first-setup" alt="First-run page that creates the first administrator with the setup token" side />
+
 1. Read the one-time setup token: `docker compose logs core`.
 2. Open `https://tak.example.org` and enter the token.
 3. Create the administrator account. Its username is also the TAK login, so choose it well.

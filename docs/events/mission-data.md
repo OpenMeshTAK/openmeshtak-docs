@@ -8,7 +8,7 @@ Map content such as the game area, points of interest and offline maps reaches A
 
 ## Create and publish
 
-![Map editor with a Data Package layer: exercise boundary, routes, rally point and HQ marker](/screenshots/event-data-packages.webp){.screenshot-right}
+<Screenshot name="package-editor" alt="Map editor with the field boundary, spawns, objectives and safe zone" side />
 
 1. Create a Data Package in the event.
 2. Draw or import the content. OpenMeshTak reads mission objects, CoT, KML/KMZ and existing ATAK Data Packages.

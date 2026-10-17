@@ -24,6 +24,8 @@ User groups are separate from the tactical **event groups** such as *Bravo*. Bei
 
 ## Users
 
+<Screenshot name="users" alt="User list with roles and sign-in state" side />
+
 **User management → Users** lists every account. From a user's menu you can rename them, add them to user groups, send a password reset or a setup link, sign them out everywhere and disable them. A disabled user cannot sign in, and their TAK apps lose access within seconds.
 
 Accounts created for one event (**event accounts**) are deleted when that event is archived, unless you keep them as permanent users. How people get accounts at all is set under [Registration](/installation/settings#general).

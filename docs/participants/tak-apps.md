@@ -37,6 +37,8 @@ Good to know:
 - Each iTAK or WinTAK download is a new login for one device. Import it within the time the dashboard shows (24 hours unless the operator changed it), otherwise it stops working. After the first connection the dashboard names the device, for example *iPhone 17 · iTAK 2.12.3 · Peter*.
 - iTAK needs the TAK server's Data Package port on `8443`. Operators find the details in [TAK ports](/installation/tak-ports#different-data-package-port).
 
+<Screenshot name="participant-connect-tak" alt="Connect a TAK app dialog with ATAK, iTAK and WinTAK" />
+
 ## WinTAK
 
 WinTAK cannot sign in with a username and password, so it only gets a connection package with its own certificate:

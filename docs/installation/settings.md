@@ -22,7 +22,11 @@ New accounts have no permissions until you add them to a user group or an event,
 
 Without email, everything else still works, but nobody can reset a forgotten password by email.
 
+<Screenshot name="settings-general" alt="General settings of the installation" />
+
 ## TAK server
+
+<Screenshot name="settings-tak-server" alt="TAK server settings with host name, ports and certificates" side />
 
 **Settings → TAK server** controls the built-in TAK server.
 

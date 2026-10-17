@@ -10,7 +10,7 @@ This page applies to events with **Use Meshtastic radios** turned on; see [Set u
 
 ## Set up the radios
 
-![Meshtastic tab showing the event firmware line and the published firmware releases](/screenshots/event-meshtastic.webp){.screenshot-right}
+<Screenshot name="event-meshtastic" alt="Meshtastic firmware page with the event firmware line and releases" side />
 
 1. Under the event's Meshtastic settings, choose the firmware. The recommended version is preselected.
 2. Adjust the radio settings and save.
@@ -24,6 +24,8 @@ Participants then download their file from the dashboard; see [Participant setup
 Only settings the chosen firmware supports are written to the file. Firmware versions tested on a real radio are marked **Tested on a device**; currently that is firmware <code>{{ $versions.firmware }}</code> with the Meshtastic Android app.
 
 ## Who gets which channel
+
+<Screenshot name="meshtastic-channels" alt="Channel list with the primary channel, group channels and a secret channel" side />
 
 Each channel has an audience: event groups, roles, single members, or any mix. A participant's file contains only the channels in their audience.
 

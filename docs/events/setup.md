@@ -8,6 +8,8 @@ This page walks through one event from creation to activation. Each step happens
 
 ## 1. Create the event
 
+<Screenshot name="event-settings" alt="Event settings with name, time zone and the Meshtastic switch" side />
+
 Choose a name, a short slug such as `lightsim-2027`, and the time zone where the event takes place. Integrations refer to the event by its slug, so keep it stable.
 
 Then decide whether the event uses Meshtastic radios. The switch **Use Meshtastic radios** is in the event's settings and is off for new events:
@@ -42,11 +44,11 @@ A member added through an external identity has no password. To let them sign in
 
 Send setup and access links privately. Anyone with the link can use it.
 
-![Members tab of an event with callsigns, short names, roles and groups](/screenshots/event-members.webp)
+<Screenshot name="event-members" alt="Members of OP Iron Fox with callsigns, short names, roles, groups and TAK app state" />
 
 ## 5. Activate
 
-![Overview of an active event with member counts, schedule and lifecycle actions](/screenshots/event-overview.webp){.screenshot-right}
+<Screenshot name="member-profile" alt="Member profile of VIPER with group, team, role, channels and downloads" side />
 
 Check the members' profiles for callsign or name conflicts, then activate the event. Participants now see their setup on the dashboard; see [Participant setup](/participants/). The members list shows who has connected a TAK app.
 

@@ -8,6 +8,8 @@ Everything the Web app does goes through the same REST API, so other programs ca
 
 ## Get an API key
 
+<Screenshot name="settings-api-clients" alt="API clients page where keys are created" side />
+
 Programs sign in with an **API client**, not with a person's account.
 
 1. Open **Settings → API clients** and create a client.

@@ -1,4 +1,5 @@
 import ScalarApiReference from "./ScalarApiReference.vue";
+import Screenshot from "./Screenshot.vue";
 import mediumZoom, { type Zoom } from "medium-zoom";
 import { nextTick, onMounted, watch } from "vue";
 import { useRoute, withBase } from "vitepress";
@@ -12,6 +13,7 @@ export default {
   extends: DefaultTheme,
   enhanceApp({ app }) {
     app.component("ScalarApiReference", ScalarApiReference);
+    app.component("Screenshot", Screenshot);
     // The Core release the reference and the install files come from; see scripts/sync-core.mjs.
     app.config.globalProperties.$coreVersion = manifest.coreVersion;
     app.config.globalProperties.$versions = versions;
@@ -23,7 +25,7 @@ export default {
     let zoom: Zoom | undefined;
     const attachScreenshots = () => {
       zoom?.detach();
-      zoom?.attach(".vp-doc img[src*='/screenshots/']");
+      zoom?.attach(".vp-doc img.screenshot");
     };
     onMounted(() => {
       zoom = mediumZoom({ background: "var(--vp-c-bg)", margin: 24 });
