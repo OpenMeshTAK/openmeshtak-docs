@@ -25,11 +25,29 @@ Before the event, test once without network: disconnect, open **/offline** on yo
 
 ## During the event
 
+<Screenshot name="offline-hq" alt="Offline HQ of OP Iron Fox with five Meshtastic nodes on the field map, the USB radio connected and the uplink on" side />
+
 1. Open **/offline** in the same browser and choose the event. No sign-in is needed.
 2. Choose **Connect radio** and allow the browser to use the USB port.
 3. Positions appear as the radio hears the other nodes, with their age. Nodes not heard from for a while are marked as stale. **Full screen** suits a wall screen.
 
-The radio only listens; the offline HQ sends nothing. Positions are not saved: after closing the page, the map starts empty again.
+The radio only listens; the offline HQ never sends anything over the mesh. Without forwarding, positions are not saved: after closing the page, the map starts empty again.
+
+## Forward to OpenMeshTak
+
+If the HQ computer has internet, even only now and then, it can pass on what its radio hears. The event then gets a [live view and a history](/events/live-history) of the radio positions, also when the participants themselves have no internet.
+
+<Screenshot name="offline-hq-outbox" alt="Uplink panel during a network outage: 37 positions queued, an error that OpenMeshTak is not reachable and the next attempt in 30 seconds" side />
+
+1. Sign in on this computer while online. You need the permission **Forward what an HQ radio hears to OpenMeshTak**.
+2. Turn on **Forward to OpenMeshTak** and give the HQ a name, such as `HQ North`. The name shows up next to the positions it forwarded.
+3. Keep the page open while the radio is connected.
+
+When the connection drops, the HQ keeps the positions in the browser and sends them in order once it is back; **Queued** shows how many are waiting. The browser keeps at most 72 hours or 50,000 positions per event. **Clear outbox** discards what has not been sent yet.
+
+Several HQs may forward at the same time: a position heard by two radios is stored once. The history is only as complete as the radios' reception and the position interval of the nodes.
+
+Radios are matched to members under [Mesh nodes](/events/meshtastic#mesh-nodes).
 
 ## Afterwards
 

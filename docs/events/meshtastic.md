@@ -40,3 +40,15 @@ Every key handout, release and rotation is recorded in the audit log.
 ## Passwords and PINs
 
 Settings such as a fixed Bluetooth PIN are write-only. The Web app shows whether they are set, never their value.
+
+## Mesh nodes
+
+Positions [forwarded by an Offline HQ](/events/offline-hq#forward-to-openmeshtak) belong to a radio, not yet to a person. **Mesh nodes** in the event's **Meshtastic** tab lists every radio the HQs heard.
+
+<Screenshot name="mesh-nodes" alt="Mesh nodes list with BLADE, FROST and KILO suggested for the matching members, and two unknown nodes" side />
+
+- When a radio's short name and long name match a member's, for example `B1` and `BLADE`, OpenMeshTak suggests that member. **Confirm** binds the radio.
+- **Bind a node** binds a radio to another member, also before any HQ heard it, by its node ID such as `!2b6c0011`.
+- A bound radio's positions continue the member's track and appear in the member's group. Radios nobody is bound to appear as **Unknown mesh nodes**, under their node ID.
+
+Binding needs the permission **Bind Meshtastic nodes to members** and applies at once; it is not part of the published configuration. Positions recorded before the binding keep their old name.

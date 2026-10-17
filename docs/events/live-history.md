@@ -8,7 +8,7 @@ During an event, the operations room follows every TAK app on a map in the brows
 
 ## Live view
 
-<Screenshot name="event-live" alt="Live view with players of Alpha, Bravo and Command on the field map" side />
+<Screenshot name="event-live" alt="Live view with TAK players of Alpha, Bravo and Command and the radio-only Bravo players BLADE, FROST and KILO on the field map" side />
 
 The live map shows the event's map data, the current position of every connected app and the markers participants placed. Positions refresh by themselves; an arrow shows where someone is heading.
 
@@ -23,6 +23,8 @@ The panel on the right lists the connected apps:
 Overlapping names on the map are hidden until you zoom in; the markers themselves always stay visible.
 
 The live view is not recorded and shows nothing of direct messages between apps. Watching it needs the permission to watch live TAK traffic; see [Users and permissions](/installation/users).
+
+Positions [forwarded by an Offline HQ](/events/offline-hq#forward-to-openmeshtak) appear as squares. A radio bound to a member is listed with that member; other radios are listed under **Unknown mesh nodes**. The menu of a row shows which HQ heard the radio.
 
 ## Recording
 
