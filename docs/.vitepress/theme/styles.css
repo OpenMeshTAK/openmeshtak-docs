@@ -99,6 +99,19 @@ html:not(.dark) .vp-doc img.screenshot-dark {
   z-index: 100;
 }
 
+/* The home page uses most of the screen width instead of VitePress' fixed 72rem column. */
+.VPHero .container,
+.VPFeatures .container {
+  max-width: 80vw;
+}
+
+@media (max-width: 959px) {
+  .VPHero .container,
+  .VPFeatures .container {
+    max-width: none;
+  }
+}
+
 /* Home hero: the logo sits above the title and the compose preview takes the image column. It
    follows the text on narrow screens instead of overlapping it like the default round image. */
 .home-hero-logo {
@@ -115,7 +128,6 @@ html:not(.dark) .vp-doc img.screenshot-dark {
 
 .VPHero .image-container {
   width: 100%;
-  max-width: 40rem;
   height: auto;
   transform: none;
 }
@@ -132,6 +144,7 @@ html:not(.dark) .vp-doc img.screenshot-dark {
   .VPHero.has-image .main,
   .VPHero .image {
     flex: 1 1 0;
+    max-width: none;
   }
 
   .VPHero .image {
