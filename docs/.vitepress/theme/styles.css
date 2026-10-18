@@ -98,3 +98,47 @@ html:not(.dark) .vp-doc img.screenshot-dark {
 .medium-zoom-image--opened {
   z-index: 100;
 }
+
+/* Home hero: the logo sits above the title and the compose preview takes the image column. It
+   follows the text on narrow screens instead of overlapping it like the default round image. */
+.home-hero-logo {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 16px;
+}
+
+.VPHero .image {
+  order: 2;
+  margin: 2.5rem 0 0;
+  min-width: 0;
+}
+
+.VPHero .image-container {
+  width: 100%;
+  max-width: 40rem;
+  height: auto;
+  transform: none;
+}
+
+.VPHero .image-bg {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .home-hero-logo {
+    margin: 0 0 16px;
+  }
+
+  .VPHero.has-image .main,
+  .VPHero .image {
+    flex: 1 1 0;
+  }
+
+  .VPHero .image {
+    margin: 0 0 0 3rem;
+  }
+
+  .VPHero .image-container {
+    align-items: flex-start;
+  }
+}

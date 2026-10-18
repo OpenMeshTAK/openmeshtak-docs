@@ -24,6 +24,7 @@
     "@scalar/api-reference": "^1.73.0",
     "@types/node": "24.19.1",
     "medium-zoom": "1.1.0",
+    "shiki": "4.5.0",
     "typescript": "5.9.3",
     "vitepress": "^2.0.0-alpha.20"
   }
