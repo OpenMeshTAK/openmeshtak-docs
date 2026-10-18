@@ -15,7 +15,10 @@ async function copy() {
 <template>
   <div class="compose-preview">
     <div class="compose-preview-header">
-      <a :href="withBase('/installation/')">docker-compose.yml</a>
+      <div class="compose-preview-title">
+        <span class="compose-preview-dots" aria-hidden="true"><i /><i /><i /></span>
+        <a :href="withBase('/installation/')">docker-compose.yml</a>
+      </div>
       <button type="button" class="compose-preview-copy" @click="copy">
         {{ copied ? "Copied" : "Copy" }}
       </button>
@@ -42,6 +45,32 @@ async function copy() {
   border-bottom: 1px solid var(--vp-c-divider);
   font-family: var(--vp-font-family-mono);
   font-size: 13px;
+}
+
+.compose-preview-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.compose-preview-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.compose-preview-dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ff5f57;
+}
+
+.compose-preview-dots i:nth-child(2) {
+  background: #febc2e;
+}
+
+.compose-preview-dots i:nth-child(3) {
+  background: #28c840;
 }
 
 .compose-preview-header a {
