@@ -132,7 +132,17 @@ export default defineConfig({
     ],
     search: { provider: "local" },
     socialLinks: [{ icon: "github", link: "https://github.com/OpenMeshTAK" }],
-    footer: { message: "OpenMeshTak documentation is licensed under CC BY 4.0." },
+    // Only repositories that exist publicly; add CLI and examples once they are published.
+    footer: {
+      message: [
+        ["Core", "openmeshtak"],
+        ["Web app", "openmeshtak-web"],
+        ["SDK", "openmeshtak-sdk"],
+        ["Documentation", "openmeshtak-docs"],
+      ]
+        .map(([name, repository]) => `<a href="https://github.com/OpenMeshTAK/${repository}">${name}</a>`)
+        .join(" · "),
+    },
     outline: { level: [2, 3] },
     lastUpdated: { text: "Last updated", formatOptions: { dateStyle: "medium" } },
   },
