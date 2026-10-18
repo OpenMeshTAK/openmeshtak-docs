@@ -1,4 +1,4 @@
-import { defineConfig } from "vitepress";
+import { defineConfig, type HeadConfig } from "vitepress";
 
 const siteUrl = "https://openmeshtak.github.io/openmeshtak-docs/";
 const socialImage = `${siteUrl}social-card.png`;
@@ -6,6 +6,21 @@ const socialImage = `${siteUrl}social-card.png`;
 // Same mapping as cleanUrls: "events/index.md" -> "events/", "events/setup.md" -> "events/setup".
 function pageUrl(relativePath: string): string {
   return siteUrl + relativePath.replace(/(^|\/)index\.md$/, "$1").replace(/\.md$/, "");
+}
+
+function softwareApplication(description: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "OpenMeshTak",
+    description,
+    url: siteUrl,
+    applicationCategory: "CommunicationApplication",
+    operatingSystem: "Linux (Docker)",
+    isAccessibleForFree: true,
+    offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+    sameAs: ["https://github.com/OpenMeshTAK/openmeshtak"],
+  };
 }
 
 export default defineConfig({
@@ -27,7 +42,13 @@ export default defineConfig({
   // Per-page link-preview tags, so shared links show the page's own title and description.
   transformHead({ pageData, title, description }) {
     const url = pageUrl(pageData.relativePath);
+    // Lets search engines show the home page as a free software project rather than a plain page.
+    const structuredData: HeadConfig[] =
+      pageData.relativePath === "index.md"
+        ? [["script", { type: "application/ld+json" }, JSON.stringify(softwareApplication(description))]]
+        : [];
     return [
+      ...structuredData,
       ["link", { rel: "canonical", href: url }],
       ["meta", { property: "og:url", content: url }],
       ["meta", { property: "og:title", content: title }],

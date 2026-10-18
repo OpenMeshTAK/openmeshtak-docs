@@ -1,5 +1,8 @@
 ---
 layout: home
+# The search result title; other pages keep "<page> | OpenMeshTak".
+title: "OpenMeshTak: TAK and Meshtastic for your event"
+titleTemplate: false
 
 hero:
   name: OpenMeshTak
