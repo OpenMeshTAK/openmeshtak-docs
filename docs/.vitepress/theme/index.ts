@@ -1,9 +1,10 @@
 import ScalarApiReference from "./ScalarApiReference.vue";
 import Screenshot from "./Screenshot.vue";
+import SiteFooter from "./SiteFooter.vue";
 import InstallFiles from "./InstallFiles.vue";
 import mediumZoom, { type Zoom } from "medium-zoom";
 import { h, nextTick, onMounted, watch } from "vue";
-import { useRoute, withBase } from "vitepress";
+import { useData, useRoute, withBase } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import "@scalar/api-reference/style.css";
 import "./styles.css";
@@ -12,13 +13,17 @@ import { versions } from "../versions";
 
 export default {
   extends: DefaultTheme,
-  // The home hero shows the logo mark (without its tile) above the title and the install files beside it.
-  Layout: () =>
-    h(DefaultTheme.Layout, null, {
+  // The home hero shows the logo mark (without its tile) above the title and the install files beside
+  // it. The home page ends with the site footer; guide pages end with their previous/next links.
+  Layout: () => {
+    const { frontmatter } = useData();
+    return h(DefaultTheme.Layout, null, {
       "home-hero-info-before": () =>
         h("img", { class: "home-hero-logo", src: withBase("/logo-mark.svg"), alt: "" }),
       "home-hero-image": () => h(InstallFiles),
-    }),
+      "layout-bottom": () => (frontmatter.value.layout === "home" ? h(SiteFooter) : null),
+    });
+  },
   enhanceApp({ app }) {
     app.component("ScalarApiReference", ScalarApiReference);
     app.component("Screenshot", Screenshot);
