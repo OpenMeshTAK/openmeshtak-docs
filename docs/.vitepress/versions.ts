@@ -9,7 +9,8 @@ export const versions = {
   android: "16",
   itak: "2.12.3",
   ios: "26",
-  wintak: "4.6.1",
+  // Both WinTAK lines passed the same test with the imported connection package.
+  wintak: "4.6.1 and 5.8.0.147",
   windows: "11",
   firmware: "2.8.1",
 
