@@ -1,7 +1,7 @@
 ---
 layout: home
 # The search result title; other pages keep "<page> | OpenMeshTak".
-title: "OpenMeshTak: TAK and Meshtastic for your event"
+title: "OpenMeshTak: Self-hosted TAK server with Meshtastic for ATAK and iTAK"
 titleTemplate: false
 
 hero:
@@ -22,8 +22,8 @@ hero:
 features:
   - title: One container
     details: Web app, API and a built-in TAK server with enrollment, Data Packages and live CoT. Self-hosted with Docker Compose.
-    link: /installation/
-    linkText: Installation
+    link: /tak-server
+    linkText: Self-hosted TAK server
   - title: Events, roles and groups
     details: Callsigns, TAK teams and radio names follow from the participant's role and group, not from hand-written lists.
     link: /events/setup

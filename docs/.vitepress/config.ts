@@ -28,7 +28,7 @@ export default defineConfig({
   base: "/openmeshtak-docs/",
   title: "OpenMeshTak",
   description:
-    "Open-source, self-hosted provisioning for TAK and Meshtastic: events, roles, TAK server, radio profiles and Data Packages through one API.",
+    "Open-source, self-hosted TAK server with Meshtastic: OpenMeshTak sets up ATAK, iTAK and WinTAK and every participant's Meshtastic radio for your event, in one Docker container.",
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "/openmeshtak-docs/logo.svg" }],
     // Google Search Console ownership check for this URL prefix.
@@ -81,6 +81,13 @@ export default defineConfig({
     ],
     // One sidebar in reading order, so the previous/next links lead through the whole guide.
     sidebar: [
+      {
+        text: "Overview",
+        items: [
+          { text: "Self-hosted TAK server", link: "/tak-server" },
+          { text: "ATAK with Meshtastic", link: "/atak-meshtastic" },
+        ],
+      },
       {
         text: "Install",
         items: [
