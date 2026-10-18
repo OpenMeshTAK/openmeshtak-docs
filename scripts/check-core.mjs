@@ -35,8 +35,8 @@ if (createHash("sha256").update(composeBytes).digest("hex") !== manifest.compose
 }
 
 const environmentExample = await readFile(new URL("../docs/public/examples/openmeshtak.env.example.txt", import.meta.url), "utf8");
-if (!environmentExample.includes(`OPENMESHTAK_VERSION=${manifest.coreVersion}
-`)) {
+// Compared per line, because a Windows checkout has CRLF line endings.
+if (!environmentExample.split(/\r?\n/u).includes(`OPENMESHTAK_VERSION=${manifest.coreVersion}`)) {
   problems.push(`the .env example does not pin OPENMESHTAK_VERSION=${manifest.coreVersion}`);
 }
 
