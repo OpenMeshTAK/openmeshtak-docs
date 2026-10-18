@@ -31,6 +31,8 @@ export default defineConfig({
     "Open-source, self-hosted provisioning for TAK and Meshtastic: events, roles, TAK server, radio profiles and Data Packages through one API.",
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "/openmeshtak-docs/logo.svg" }],
+    // Google Search Console ownership check for this URL prefix.
+    ["meta", { name: "google-site-verification", content: "kHCnvCl6-VIHelTPPp3CBND_67CcPyYvldiBTrHkd-4" }],
     ["meta", { property: "og:site_name", content: "OpenMeshTak" }],
     ["meta", { property: "og:type", content: "website" }],
     ["meta", { property: "og:image", content: socialImage }],
