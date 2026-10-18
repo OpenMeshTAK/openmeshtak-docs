@@ -2,6 +2,26 @@
   --vp-layout-max-width: 100%;
 }
 
+/* Brand colours follow the logo blue, so the hero title, buttons and links share one tone. Light
+   mode uses a darker shade for contrast on white; dark mode uses the logo colour itself with dark
+   button text. */
+:root {
+  --vp-c-brand-1: #2f6db5;
+  --vp-c-brand-2: #3b7cc4;
+  --vp-c-brand-3: #2f6db5;
+  --vp-c-brand-soft: rgba(47, 109, 181, 0.14);
+}
+
+.dark {
+  --vp-c-brand-1: #7fb0e8;
+  --vp-c-brand-2: #99c0ee;
+  --vp-c-brand-3: #7fb0e8;
+  --vp-c-brand-soft: rgba(127, 176, 232, 0.16);
+  --vp-button-brand-text: #111418;
+  --vp-button-brand-hover-text: #111418;
+  --vp-button-brand-active-text: #111418;
+}
+
 .VPDoc .container,
 .VPDoc .content,
 .VPDoc .content-container {
@@ -99,21 +119,24 @@ html:not(.dark) .vp-doc img.screenshot-dark {
   z-index: 100;
 }
 
-/* The home page uses most of the screen width instead of VitePress' fixed 72rem column. */
-.VPHero .container,
-.VPFeatures .container {
-  max-width: 80vw;
-}
-
-@media (max-width: 959px) {
+/* The home page uses most of the screen width instead of VitePress' fixed 72rem column, and the
+   nav bar shares that column so the left edges line up. */
+@media (min-width: 960px) {
+  .VPNavBar.home .container,
   .VPHero .container,
   .VPFeatures .container {
+    max-width: 80vw;
+  }
+
+  .VPHero .name,
+  .VPHero .text {
     max-width: none;
   }
 }
 
 /* Home hero: the logo sits above the title and the compose preview takes the image column. It
-   follows the text on narrow screens instead of overlapping it like the default round image. */
+   follows the text on narrow screens instead of overlapping it like the default round image. The
+   mark has no tile here; the dark tile looked like a heavy block in light mode. */
 .home-hero-logo {
   width: 72px;
   height: 72px;

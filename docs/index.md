@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: OpenMeshTak
-  text: Self-hosted TAK and Meshtastic provisioning
+  text: TAK and Meshtastic for your event
   tagline: Set up an event once. Every participant gets their own TAK connection, radio profile and maps.
   actions:
     - theme: brand
@@ -41,6 +41,10 @@ features:
     details: Follow every TAK app on the event map in the browser, grouped by platoon, and replay recorded tracks afterwards.
     link: /events/live-history
     linkText: Live view and history
+  - title: Offline HQ
+    details: Without internet, the HQ browser still shows the event map with live radio positions from a Meshtastic radio on USB.
+    link: /events/offline-hq
+    linkText: Offline HQ
   - title: Automation
     details: Everything in the Web app is available through a versioned REST API, for example to add members from a Discord bot.
     link: /api/examples/
