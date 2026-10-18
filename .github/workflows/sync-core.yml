@@ -60,16 +60,21 @@ jobs:
         run: |
           branch="sync/core-$VERSION"
           if git ls-remote --exit-code --heads origin "$branch" >/dev/null; then
-            echo "A pull request branch for Core $VERSION already exists."
-            exit 0
+            # A pushed branch without a pull request means an earlier run failed at the last step;
+            # open the pull request for it instead of skipping it forever.
+            if [ -n "$(gh pr list --head "$branch" --state all --json number --jq '.[].number')" ]; then
+              echo "A pull request for Core $VERSION already exists."
+              exit 0
+            fi
+          else
+            pnpm core:sync "$VERSION"
+            pnpm check
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git switch -c "$branch"
+            git add docs/public
+            git commit -m "docs(api): sync Core $VERSION"
+            git push origin "$branch"
           fi
-          pnpm core:sync "$VERSION"
-          pnpm check
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git switch -c "$branch"
-          git add docs/public
-          git commit -m "docs(api): sync Core $VERSION"
-          git push origin "$branch"
-          gh pr create --title "docs(api): sync Core $VERSION" \
+          gh pr create --head "$branch" --title "docs(api): sync Core $VERSION" \
             --body "Copies the OpenAPI document and docker-compose.yml from OpenMeshTAK/openmeshtak@v$VERSION. Review the install guide and the reference before merging."
