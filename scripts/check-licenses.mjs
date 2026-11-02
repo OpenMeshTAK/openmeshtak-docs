@@ -12,6 +12,7 @@ const allowedLicenses = new Set([
 
 const reviewedExceptions = new Set([
   "@iconify-json/simple-icons@1.2.99:CC0-1.0",
+  "@iconify-json/simple-icons@1.2.101:CC0-1.0",
   "lightningcss@1.33.0:MPL-2.0",
   "lightningcss-android-arm64@1.33.0:MPL-2.0",
   "lightningcss-darwin-arm64@1.33.0:MPL-2.0",
@@ -25,6 +26,7 @@ const reviewedExceptions = new Set([
   "lightningcss-win32-arm64-msvc@1.33.0:MPL-2.0",
   "lightningcss-win32-x64-msvc@1.33.0:MPL-2.0",
   "tslib@2.8.1:0BSD",
+  "tslib@2.9.1:0BSD",
 ]);
 
 const input = await readStandardInput();
