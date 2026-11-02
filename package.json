@@ -26,6 +26,6 @@
     "medium-zoom": "1.1.2",
     "shiki": "4.5.0",
     "typescript": "6.0.3",
-    "vitepress": "^2.0.0-alpha.20"
+    "vitepress": "^2.0.0-alpha.21"
   }
 }
